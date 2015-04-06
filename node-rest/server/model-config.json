@@ -1,0 +1,44 @@
+{
+  "_meta": {
+    "sources": [
+      "../common/models",
+      "./models"
+    ]
+  },
+  "Address": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Geo": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Liefernrole": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Order": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Package": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Ratemeterics": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Travelerrating": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Payments": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Liefernuser": {
+    "dataSource": "db",
+    "public": true
+  }
+}

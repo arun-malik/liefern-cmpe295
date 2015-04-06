@@ -1,0 +1,11 @@
+{
+  "db": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "url": "jdbc://127.0.0.1:3306/liefern",
+    "database": "liefern",
+    "name": "db",
+    "connector": "mysql",
+    "user": "root"
+  }
+}
