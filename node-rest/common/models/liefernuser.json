@@ -6,12 +6,17 @@
     "schema": "liefern",
     "table": "liefernUser"
   },
+  "hidden": [
+    "hashpassword",
+    "secretkey",
+    "password"
+  ],
   "properties": {
     "userid": {
       "type": "Number",
       "id": true,
-      "required": false,
       "generated": true,
+      "required": false,
       "length": null,
       "precision": 10,
       "scale": 0,
@@ -205,6 +210,5 @@
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": [],
-  "hidden" : ["hashpassword","secretkey","password"]
+  "methods": []
 }
