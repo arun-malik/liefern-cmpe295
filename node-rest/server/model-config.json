@@ -13,10 +13,6 @@
     "dataSource": "db",
     "public": true
   },
-  "Liefernrole": {
-    "dataSource": "db",
-    "public": true
-  },
   "Order": {
     "dataSource": "db",
     "public": true

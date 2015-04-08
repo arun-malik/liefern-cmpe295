@@ -1,155 +1,204 @@
 var Crypto = require('../utils/authorization');
-var Hashids = require("hashids");
+var uuid = require('node-uuid');
+var hash = require("hashids")
 
 module.exports = function(Liefernuser) {
 
-//  // this is to disable api
-//  //Liefernuser.disableRemoteMethod('saveUser', true); // GET /Liefernuser
-//
-//
-//  //will be used in every API to check token
-//  Liefernuser.beforeRemote('find', function(ctx, unused, next) {
-//
-//    var email  =  ctx.req.body.email;
-//
-//    if(ctx.req.headers.token) {
-//      console.log(ctx.req.headers.token);
-//      var user = Liefernuser.find({"where": {"sessiontoken": ctx.req.headers.token}});
-//      console.log(user);
-//
-//      next();
-//    } else {
-//      next(new Error('must be logged in to update'))
-//    }
-//  });
-//
-//
-//// should check token for all request except user creation
-//  Liefernuser.beforeRemote('find', function(ctx, unused, next) {
-//    var token = ctx.req.headers.token;
-//    if(token) {
-//        //request.get({
-//        //  url: 'http://127.0.0.1:3000/api/liefernusers//findOne?filter={"where": {"sessiontoken": "'+token+'"}}',
-//        //  method: 'GET',
-//        //  json: ctx.result
-//        //}, function (err, res) {
-//        //  if (err){
-//        //    console.error(err);
-//        //  }else{
-//        //
-//        //    //var now = new Date().toLocaleTimeString();
-//        //    //console.log(now);
-//        //    //
-//        //    //var SessionToken = createHashPassword.decrypt(now,"malik.mgm@gmail.com");
-//        //    //console.log("SessionToken : ",SessionToken);
-//        //    //
-//        //    //var lastAuthTime = createHashPassword.decrypt(SessionToken,"malik.mgm@gmail.com");
-//        //    //console.log("lastAuthTime: ",lastAuthTime);
-//        //
-//        //    console.log("token: ",token);
-//        //    console.log("email: ",JSON.parse(res.body).email);
-//        //    var lastAuthTime = createHashPassword.decrypt(token,JSON.parse(res.body).email);
-//        //    console.log("lastAuthTime: ",lastAuthTime);
-//        //  }
-//        //  next();
-//        //});
-//     }
-//  });
-//
-//
-//
-//  Liefernuser.beforeRemote('create', function(ctx, unused, next) {
-//     var json = ctx.req.body;
-//
-//    if (!json.hasOwnProperty('email')){
-//      next(new Error('email is mandatory field'))
-//    }
-//
-//    if (!json.hasOwnProperty('mobile')){
-//      next(new Error('email is mandatory field'))
-//    }
-//
-//    if (!json.hasOwnProperty('mobile')){
-//      next(new Error('email is mandatory field'))
-//    }
-//
-//    var secretKey = Crypto.createHashPassword(json.email,json.mobile);
-//
-//    var hashPassword = Crypto.encrypt(secretKey,json.password);
-//    //console.log("hashPassword : " ,hashPassword);
-//
-//    //var revUserPassword = Crypto.decrypt(hashPassword,secretKey); // to be removed
-//    //console.log("revUserPassword : " ,revUserPassword);
-//
-//    var sessionToken = Crypto.generateSessionToken(json.email); //TODO: this will be replace by combination of device UUID and email id
-//    //console.log("SessionToken: ",sessionToken);
-//
-//    //var revtime = Crypto.decrypt(sessionToken,json.email); // to be removed
-//    //console.log("revTime : " ,revtime);
-//
-//    ctx.req.body.hashpassword = hashPassword;
-//    ctx.req.body.secretkey =  secretKey;
-//    ctx.req.body.sessiontoken = sessionToken;
-//
-//    next();
-//
-//  });
-//
-//
-//  Liefernuser.remoteMethod(
-//    'login',
-//    {
-//      accepts: { arg: 'data', type: 'object', http: { source: 'body' } } ,
-//      returns : {arg: 'userSessionToken', type: 'string'},
-//      http: {path: '/login', verb:'POST'},
-//      description : 'Authenticate and return session token to user'
-//    }
-//  );
-//
-//
-//  Liefernuser.login = function(data,cb){
-//
-//    if (!data.hasOwnProperty('email')){
-//      cb(null,'email is mandatory field');
-//    }
-//
-//    Liefernuser.findOne({"where":{"email": data.email}}, function(err,res){
-//      if(err){
-//        console.log(err);
-//        cb(null,err);
-//
-//      }
-//
-//      //if(res){
-//      //
-//      //  var revUserPassword = Crypto.decrypt(res.hashpassword,res.secretkey);
-//      //
-//      //  if(revUserPassword === data.password){
-//      //    if((new Date().getTime() - res.sessiontoken) > 60000){ // session expires after 10 mins
-//      //      var sessionToken = Crypto.generateSessionToken(data.email); //TODO: this will be replace by combination of device UUID and email id
-//      //      res.sessiontoken = sessionToken;
-//      //
-//      //      Liefernuser.upsert(res, function(err,res) {
-//      //        if(err){
-//      //          console.log(err);
-//      //          cb(null,err);
-//      //
-//      //        }
-//      //
-//      //        cb(null,res.sessiontoken);
-//      //      });
-//      //    }
-//      //      cb(null,res.sessiontoken);
-//      //  }
-//      //}
-//
-//       if(null === res){
-//         cb(null,"user not found");
-//
-//       }
-//
-//    });
-//  };
+    Liefernuser.remoteMethod(
+        'loginUser',
+        {
+            accepts: { arg: 'data', type: 'object', http: { source: 'body' } } ,
+            returns : {arg: 'token', type: 'string'},
+            http: {path: '/login', verb:'POST'},
+            description : 'Authenticate and return session token to user'
+        }
+    );
+
+    Liefernuser.remoteMethod(
+        'logoutUser',
+        {
+            // accepts: { arg: 'data', type: 'object', http: { source: 'body' } } ,
+            returns : {arg: 'logout', type: 'Boolean'},
+            http: {path: '/logout', verb:'POST'},
+            description : 'clear session token and set 0 in active'
+        }
+    );
+
+    // add session key and hash password to DB
+  Liefernuser.beforeRemote('create', function(ctx, unused, next) {
+     var json = ctx.req.body;
+
+    if (!json.hasOwnProperty('email')){
+      next(new Error('email is mandatory field'))
+    }
+
+    if (!json.hasOwnProperty('mobile')){
+      next(new Error('mobile is mandatory field'))
+    }
+
+    if (!json.hasOwnProperty('password')){
+      next(new Error('password is mandatory field'))
+    }
+
+
+    var secretKey = uuid.v1();
+      //console.log("secretkey : ",secretKey);
+
+    var hashPassword = Crypto.encrypt(secretKey,json.password);
+    //console.log("hashPassword : " ,hashPassword);
+
+    //var revUserPassword = Crypto.decrypt(hashPassword,secretKey);
+    //console.log("revUserPassword : " ,revUserPassword);
+
+    var now = new Date().getTime().toString();
+    var sessionToken = Crypto.encrypt(secretKey,now);
+    //console.log("SessionToken: ",sessionToken);
+
+    //var revtime = Crypto.decrypt(sessionToken,secretKey); // to be removed
+    //console.log("revTime : " ,revtime);
+
+    ctx.req.body.hashpassword = hashPassword;
+    ctx.req.body.secretkey =  secretKey;
+    ctx.req.body.sessiontoken = sessionToken;
+
+    next();
+
+  });
+
+    Liefernuser.beforeRemote('logoutUser', function(ctx, unused, next) {
+
+        var header = ctx.req.headers;
+
+        if (!header.hasOwnProperty('token')){
+            next(new Error('please pass token in header'))
+        }
+
+        Liefernuser.find({  where:
+                              {   sessiontoken : header.token
+
+                              }
+        }, function(err,user){
+
+            if(err){
+                next(new Error(err));
+            }
+
+            if(user.length ===0){
+                next(new Error("Invalid Token. Please login again"));
+            }else{
+                user.sessiontoken = null;
+                user.active = 0;
+
+                Liefernuser.update( {sessiontoken : header.token}, {sessiontoken : null , active : 0} ,{ upsert: true },
+                function(err,res) {
+                    if(err){
+                      console.log(err);
+                      next(new Error(err));
+
+                    }
+
+                    ctx.req.body.success = true;
+                    next();
+
+                  });
+            }
+
+        });
+    });
+
+    Liefernuser.logoutUser = function(cb){
+        cb(null,"true");
+    };
+
+    // session token has time, can add logic for session time out if required
+    Liefernuser.loginUser = function(json,cb){
+
+        if (!json.hasOwnProperty('email')){
+            cb(new Error('email is required field'),null);
+        }
+
+        validateUserAndPassword(json, function(err, res){
+
+            if(err)
+            {
+                cb(err,null);
+            }
+
+            if(res.length === 0){
+                cb(new Error("Error login."))
+            }
+
+
+            cb(null,res.sessiontoken);
+        });
+
+
+    };
+
+
+validateUserAndPassword =  function (json,callback) {
+
+
+    Liefernuser.findOne({  where:
+    {   email :  json.email
+
+    }
+    }, function(err,user){
+
+        console.log(user);
+
+        if(err){
+            callback(new Error(err),null);
+        }
+
+        if(user.length ===0){
+            callback(new Error("Invalid email"),null);
+        }else{
+
+            var revUserPassword = Crypto.decrypt(user.hashpassword,user.secretkey);
+            console.log("revUserPassword : " ,revUserPassword);
+
+            if(revUserPassword !== json.password){
+
+                callback(new Error("Incorrect password."),null);
+            }
+
+            if(user.sessiontoken === null && user.active ===0){
+
+                var secretKey = uuid.v1();
+                var now = new Date().getTime().toString();
+                var sessionToken = Crypto.encrypt(secretKey,now);
+
+                user.sessiontoken =sessionToken;
+                user.secretkey = secretKey;
+                user.active = 1;
+
+            Liefernuser.update( {email : user.email}, {sessiontoken : sessionToken , active : 1, secretkey : secretKey} ,{ upsert: true },
+                    function(err,res) {
+                        if(err){
+                            console.log(err);
+                            callback(new Error(err),null);
+
+                        }
+
+                        callback(null,user);
+
+                    });
+
+
+            }else{
+                callback(null,user);
+            }
+
+
+        }
+
+    });
+
+  //return true;
+};
+
+
 
 
 };

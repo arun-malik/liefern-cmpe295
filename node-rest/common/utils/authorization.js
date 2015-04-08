@@ -1,6 +1,4 @@
 var crypto = require('crypto');
-var Hashids = require("hashids");
-
 
 module.exports.encrypt = function (secretKey, userPassword) {
 
@@ -22,19 +20,18 @@ module.exports.decrypt = function (encodedPassword, secretKey) {
   };
 
 
-module.exports.generateSessionToken =  function (email) {
+//module.exports.generateSessionToken =  function (email) {
+//
+//  var now = new Date().getTime().toString();
+//  var cipher = crypto.createCipher("aes192", email);
+//  cipher.update(now, "binary", "hex");
+//  var encodedPassword = cipher.final("hex");
+//
+//  return encodedPassword;
+//};
 
-  var now = new Date().getTime().toString();
-  var cipher = crypto.createCipher("aes192", email);
-  cipher.update(now, "binary", "hex");
-  var encodedPassword = cipher.final("hex");
-
-  return encodedPassword;
-};
-
-module.exports.createHashPassword =  function (email,mobile) {
-
-  var hashSessionId = new Hashids(email);
-  return hashSessionId.encode(mobile);
-};
-
+//module.exports.createSecretKey =  function () {
+//
+//    var hashSessionId = new Hashids(new Date().getTime().toString());
+//    return hashSessionId.encode(mobile);
+//};

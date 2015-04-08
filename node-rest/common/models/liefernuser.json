@@ -6,17 +6,12 @@
     "schema": "liefern",
     "table": "liefernUser"
   },
-  "hidden": [
-    "hashpassword",
-    "secretkey",
-    "password"
-  ],
   "properties": {
     "userid": {
       "type": "Number",
       "id": true,
-      "generated": true,
       "required": false,
+      "generated" : true,
       "length": null,
       "precision": 10,
       "scale": 0,
@@ -29,22 +24,6 @@
         "nullable": "N"
       },
       "_selectable": false
-    },
-    "liefernroleid": {
-      "type": "Number",
-      "required": false,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
-      "mysql": {
-        "columnName": "liefernRoleId",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
-      "_selectable": true
     },
     "name": {
       "type": "String",
@@ -210,5 +189,6 @@
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": []
+  "methods": [],
+  "hidden": ["secretkey","hashpassword","password"]
 }
