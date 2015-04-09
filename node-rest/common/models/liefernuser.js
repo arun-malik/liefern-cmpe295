@@ -1,8 +1,21 @@
 var Crypto = require('../utils/authorization');
 var uuid = require('node-uuid');
-var hash = require("hashids")
+var hash = require("hashids");
+var Payments = require('./payments');
+
 
 module.exports = function(Liefernuser) {
+
+    Liefernuser.beforeRemote('prototype.*', function(ctx, user, next) {
+
+        var header = ctx.req.headers;
+
+        if (!header.hasOwnProperty('token')){
+            next(new Error('please pass token in header'))
+        }
+
+        next();
+    });
 
     Liefernuser.remoteMethod(
         'loginUser',
@@ -195,9 +208,62 @@ validateUserAndPassword =  function (json,callback) {
 
     });
 
-  //return true;
 };
 
+
+    module.exports.getUser =  function (token,cb) {
+
+        Liefernuser.findOne({  where:
+        {   sessiontoken : token
+
+        }
+        }, function(err,user){
+
+            if(err){
+                //return new Error(err);
+                cb(null,new Error(err));
+            }
+
+            if(user.length ===0){
+                //return new Error("Invalid Token. Please login again");
+                cb(null,new Error("Invalid Token. Please login again"));
+            }else {
+
+
+                Payments.getPaymentDetails(user.userid,cb),function(err,res){
+
+
+                    if(err){
+                        //return new Error(err);
+                        cb(err,null);
+                    }
+
+                    //return res;
+                    cb(res,null);
+
+                }
+                //Payments.find({  where:
+                //{   userid : user.userid
+                //
+                //}
+                //}, function(err,pay){
+                //
+                //    if(err){
+                //        next(new Error(err));
+                //    }
+                //
+                //    if(pay.length ===0){
+                //        next(new Error("Please add paymnent details before processing order"));
+                //    }else {
+                //
+                //        next();
+                //    }
+                //
+                //});
+            }
+
+        });
+    };
 
 
 
