@@ -137,12 +137,12 @@ module.exports = function(Liefernuser) {
                 cb(err,null);
             }
 
-            if(res.length === 0){
+            if(res === null){
                 cb(new Error("Error login."))
+            }else{
+                cb(null,res.sessiontoken);
             }
-
-
-            cb(null,res.sessiontoken);
+            
         });
 
 
@@ -164,7 +164,7 @@ validateUserAndPassword =  function (json,callback) {
             callback(new Error(err),null);
         }
 
-        if(user.length ===0){
+        if(user === null){
             callback(new Error("Invalid email"),null);
         }else{
 
