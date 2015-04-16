@@ -10,7 +10,8 @@
     "addressid": {
       "type": "Number",
       "id": true,
-      "required": true,
+      "generated": true,
+      "required": false,
       "length": null,
       "precision": 10,
       "scale": 0,
@@ -186,7 +187,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "fromlocation": {
+      "type": "hasOne",
+      "model": "Order",
+      "foreignKey": "fromloc"
+    },
+    "tolocation": {
+      "type": "hasOne",
+      "model": "Order",
+      "foreignKey": "toloc"
+    }
+  },
   "acls": [],
   "methods": []
 }

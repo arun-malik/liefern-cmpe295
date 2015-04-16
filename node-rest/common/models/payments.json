@@ -10,7 +10,8 @@
     "paymentid": {
       "type": "Number",
       "id": true,
-      "required": true,
+      "generated": true,
+      "required": false,
       "length": null,
       "precision": 10,
       "scale": 0,
@@ -138,7 +139,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "Liefernuser",
+      "foreignKey": "userid"
+    }
+  },
   "acls": [],
   "methods": []
 }

@@ -1,0 +1,46 @@
+package com.liefern.models;
+
+
+public final class LiefernRepository {
+	
+	private static final Object obj = new Object();
+	private static LiefernRepository instance;
+	
+	private User loggedInUser;
+	private String authToken;
+	
+	private LiefernRepository() {}
+	
+	public static LiefernRepository getInstance() {
+		if(instance == null) {
+			synchronized (obj) {
+				if(instance == null) {
+					instance = new LiefernRepository();
+				}
+			}
+		}
+		return instance;
+	}
+
+	public User getLoggedInUser() {
+		return loggedInUser;
+	}
+
+	public void setLoggedInUser(User loggedInUser) {
+		this.loggedInUser = loggedInUser;
+	}
+
+	public String getAuthToken() {
+		return authToken;
+	}
+
+	public void setAuthToken(String authToken) {
+		this.authToken = authToken;
+	}
+	
+	public void clear() {
+		authToken = null;
+		instance = null;
+	}
+
+}

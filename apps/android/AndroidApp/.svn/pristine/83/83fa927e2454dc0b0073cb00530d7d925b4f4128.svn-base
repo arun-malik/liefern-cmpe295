@@ -1,0 +1,64 @@
+package com.liefern.webservices.impl;
+
+import java.io.IOException;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
+
+import com.liefern.constants.Constants;
+import com.liefern.models.LiefernRepository;
+
+import android.util.Log;
+
+public final class WebServiceHelper {
+	private static final String TAG =  "WebServiceHelper";
+	private static final Object obj = new Object();
+	
+	/**
+	 * Executes Http request
+	 * @param oHttpRequestBase Request to execute
+	 * @return JSON response object
+	 * @throws Exception
+	 */
+	public static JSONObject executeRequest(HttpRequestBase oHttpRequestBase) throws  Exception
+	{
+		synchronized (obj) {
+			try {
+				if(oHttpRequestBase != null) {
+					oHttpRequestBase.setHeader("Content-type", "application/json");
+					oHttpRequestBase.setHeader(Constants.TOKEN, LiefernRepository.getInstance().getAuthToken());
+					
+					HttpResponse oHttpResponse = NetworkUtility.getInstance().getNewHttpClient().execute(oHttpRequestBase);
+					
+					if(oHttpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK ||
+							oHttpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_INTERNAL_SERVER_ERROR ||
+							oHttpResponse.getStatusLine().getStatusCode() == 422) {
+						
+						JSONObject oResponseJSON = new JSONObject(EntityUtils.toString(oHttpResponse.getEntity()));
+						
+						Log.d(TAG, "Response ---> " + oResponseJSON.toString());
+						
+						return oResponseJSON;
+					} else {
+						Log.e(TAG, "Response ---> " + EntityUtils.toString(oHttpResponse.getEntity()));
+						Log.e(TAG, "Incorrect Status code --> " + oHttpResponse.getStatusLine().getStatusCode());
+						
+						// ERROR!! Incorrect Http response code
+						IOException ioe = new IOException(oHttpResponse.getStatusLine().getReasonPhrase());
+						throw ioe;
+					}
+				}
+				
+			} catch(Exception e) {
+				
+				e.printStackTrace();
+				throw e;
+				
+			}
+		}
+		return null;
+	}
+}

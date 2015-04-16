@@ -6,22 +6,22 @@ var Payments = require('./payments');
 
 module.exports = function(Liefernuser) {
 
-    Liefernuser.beforeRemote('prototype.*', function(ctx, user, next) {
-
-        var header = ctx.req.headers;
-
-        if (!header.hasOwnProperty('token')){
-            next(new Error('please pass token in header'))
-        }
-
-        next();
-    });
+    //Liefernuser.beforeRemote('prototype.*', function(ctx, user, next) {
+    //
+    //    var header = ctx.req.headers;
+    //
+    //    if (!header.hasOwnProperty('token')){
+    //        next(new Error('please pass token in header'))
+    //    }
+    //
+    //    next();
+    //});
 
     Liefernuser.remoteMethod(
         'loginUser',
         {
             accepts: { arg: 'data', type: 'object', http: { source: 'body' } } ,
-            returns : {arg: 'token', type: 'string'},
+            returns : {arg: 'response', type: 'object'},
             http: {path: '/login', verb:'POST'},
             description : 'Authenticate and return session token to user'
         }
@@ -54,7 +54,7 @@ module.exports = function(Liefernuser) {
     }
 
 
-    var secretKey = uuid.v1();
+    var secretKey = 'liefernmalik';
       //console.log("secretkey : ",secretKey);
 
     var hashPassword = Crypto.encrypt(secretKey,json.password);
@@ -86,7 +86,7 @@ module.exports = function(Liefernuser) {
             next(new Error('please pass token in header'))
         }
 
-        Liefernuser.find({  where:
+        Liefernuser.findOne({  where:
                               {   sessiontoken : header.token
 
                               }
@@ -105,7 +105,7 @@ module.exports = function(Liefernuser) {
                 Liefernuser.update( {sessiontoken : header.token}, {sessiontoken : null , active : 0} ,{ upsert: true },
                 function(err,res) {
                     if(err){
-                      console.log(err);
+                      //console.log(err);
                       next(new Error(err));
 
                     }
@@ -120,7 +120,7 @@ module.exports = function(Liefernuser) {
     });
 
     Liefernuser.logoutUser = function(cb){
-        cb(null,"true");
+        cb(null,true);
     };
 
     // session token has time, can add logic for session time out if required
@@ -140,9 +140,9 @@ module.exports = function(Liefernuser) {
             if(res === null){
                 cb(new Error("Error login."))
             }else{
-                cb(null,res.sessiontoken);
+                cb(null,res);
             }
-            
+
         });
 
 
@@ -158,7 +158,7 @@ validateUserAndPassword =  function (json,callback) {
     }
     }, function(err,user){
 
-        console.log(user);
+        //console.log(user);
 
         if(err){
             callback(new Error(err),null);
@@ -169,7 +169,7 @@ validateUserAndPassword =  function (json,callback) {
         }else{
 
             var revUserPassword = Crypto.decrypt(user.hashpassword,user.secretkey);
-            console.log("revUserPassword : " ,revUserPassword);
+            //console.log("revUserPassword : " ,revUserPassword);
 
             if(revUserPassword !== json.password){
 
@@ -189,7 +189,7 @@ validateUserAndPassword =  function (json,callback) {
             Liefernuser.update( {email : user.email}, {sessiontoken : sessionToken , active : 1, secretkey : secretKey} ,{ upsert: true },
                     function(err,res) {
                         if(err){
-                            console.log(err);
+                            //console.log(err);
                             callback(new Error(err),null);
 
                         }

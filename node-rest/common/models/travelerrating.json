@@ -10,7 +10,8 @@
     "travelerratingid": {
       "type": "Number",
       "id": true,
-      "required": true,
+      "generated": true,
+      "required": false,
       "length": null,
       "precision": 10,
       "scale": 0,
@@ -106,7 +107,24 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Liefernuser",
+      "foreignKey": "customerid"
+    },
+    "traveler": {
+      "type": "belongsTo",
+      "model": "Liefernuser",
+      "foreignKey": "travelerid"
+    },
+    "order": {
+      "type": "belongsTo",
+      "model": "Order",
+      "foreignKey": "orderid"
+    }
+  },
   "acls": [],
   "methods": []
 }
+

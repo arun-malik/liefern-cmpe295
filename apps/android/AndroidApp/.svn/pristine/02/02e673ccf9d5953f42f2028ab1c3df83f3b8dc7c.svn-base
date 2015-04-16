@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:padding="10dp" >
+
+    <TextView
+        style="@style/FormHeading"
+        android:text="@string/sign_up" />
+
+    <EditText
+        android:id="@+id/name"
+        style="@style/InputEditText"
+        android:text="j"
+        android:hint="@string/name" />
+    
+    <EditText
+        android:id="@+id/mobile_no"
+        style="@style/InputEditText"
+        android:hint="@string/mobile"
+        android:text="123"
+        android:inputType="phone" />
+    
+    <EditText
+        android:id="@+id/email_id"
+        style="@style/InputEditText"
+        android:hint="@string/email_id"
+        android:text="j@gmail.com"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        style="@style/InputEditText"
+        android:id="@+id/password"
+        android:hint="@string/password"
+        android:text="qwe"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/sign_up"
+       	style="@style/BlueButton"
+        android:text="@string/sign_up" />
+
+</LinearLayout>

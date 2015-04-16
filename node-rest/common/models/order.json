@@ -10,7 +10,8 @@
     "orderid": {
       "type": "Number",
       "id": true,
-      "required": true,
+      "generated": true,
+      "required": false,
       "length": null,
       "precision": 10,
       "scale": 0,
@@ -48,70 +49,6 @@
       "scale": 0,
       "mysql": {
         "columnName": "orderStatus",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
-      "_selectable": true
-    },
-    "fromloc": {
-      "type": "Number",
-      "required": false,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
-      "mysql": {
-        "columnName": "fromLoc",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
-      "_selectable": true
-    },
-    "toloc": {
-      "type": "Number",
-      "required": false,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
-      "mysql": {
-        "columnName": "toLoc",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
-      "_selectable": true
-    },
-    "customerid": {
-      "type": "Number",
-      "required": false,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
-      "mysql": {
-        "columnName": "customerId",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "Y"
-      },
-      "_selectable": true
-    },
-    "travlerid": {
-      "type": "Number",
-      "required": false,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
-      "mysql": {
-        "columnName": "travlerId",
         "dataType": "int",
         "dataLength": null,
         "dataPrecision": 10,
@@ -215,10 +152,101 @@
         "nullable": "Y"
       },
       "_selectable": true
+    },
+    "fromloc": {
+      "type": "Address",
+      "required": false,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "fromLoc",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "toloc": {
+      "type": "Address",
+      "required": false,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "toLoc",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "customerid": {
+      "type": "Liefernuser",
+      "required": false,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "customerId",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "travlerid": {
+      "type": "Liefernuser",
+      "required": false,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "travlerId",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "Y"
+      },
+      "_selectable": true
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "packages": {
+      "type": "hasMany",
+      "model": "Package",
+      "foreignKey": "orderid"
+    },
+    "fromlocation": {
+      "type": "belongsTo",
+      "model": "Address",
+      "foreignKey": "fromloc"
+    },
+    "tolocation": {
+      "type": "belongsTo",
+      "model": "Address",
+      "foreignKey": "toloc"
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "Liefernuser",
+      "foreignKey": "customerid"
+    },
+    "traveler": {
+      "type": "belongsTo",
+      "model": "Liefernuser",
+      "foreignKey": "travlerid"
+    }
+
+  },
   "acls": [],
   "methods": []
 }

@@ -1,0 +1,68 @@
+package com.liefern.models;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.liefern.constants.Constants;
+
+
+public class User {
+	private String name;
+	private String emailId;
+	private String mobile;
+	private String creditCard;
+	private String password;
+	private byte active;
+	private float avgRating;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+	public String getCreditCard() {
+		return creditCard;
+	}
+	public void setCreditCard(String creditCard) {
+		this.creditCard = creditCard;
+	}
+	public byte getActive() {
+		return active;
+	}
+	public void setActive(byte active) {
+		this.active = active;
+	}
+	public float getAvgRating() {
+		return avgRating;
+	}
+	public void setAvgRating(float avgRating) {
+		this.avgRating = avgRating;
+	}
+	public String getEmailId() {
+		return emailId;
+	}
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public JSONObject toJSON() throws JSONException {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put(Constants.EMAIL, this.getEmailId());
+		jsonObject.put(Constants.PASSWORD, this.getPassword());
+		jsonObject.put(Constants.MOBILE, this.getMobile());
+		return jsonObject;
+	}
+	
+}

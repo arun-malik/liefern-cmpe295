@@ -6,12 +6,17 @@
     "schema": "liefern",
     "table": "liefernUser"
   },
+  "hidden": [
+    "secretkey",
+    "hashpassword",
+    "password"
+  ],
   "properties": {
     "userid": {
       "type": "Number",
       "id": true,
+      "generated": true,
       "required": false,
-      "generated" : true,
       "length": null,
       "precision": 10,
       "scale": 0,
@@ -187,8 +192,35 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+
+    "requests": {
+      "type": "hasMany",
+      "model": "Order",
+      "foreignKey": "customerid"
+    },
+    "deliveries": {
+      "type": "hasMany",
+      "model": "Order",
+      "foreignKey": "travlerid"
+    },
+    "geos": {
+      "type": "hasMany",
+      "model": "Geo",
+      "foreignKey": "userid"
+    },
+    "payments": {
+      "type": "hasMany",
+      "model": "Payments",
+      "foreignKey": "userid"
+    },
+    "addresses": {
+      "type": "hasMany",
+      "model": "Address",
+      "foreignKey": "userid"
+    }
+
+  },
   "acls": [],
-  "methods": [],
-  "hidden": ["secretkey","hashpassword","password"]
+  "methods": []
 }
