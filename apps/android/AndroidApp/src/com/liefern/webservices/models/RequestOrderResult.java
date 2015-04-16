@@ -25,6 +25,9 @@ public class RequestOrderResult extends WebServiceModel {
 	@SuppressLint("NewApi")
 	@Override
 	public void parseJSON(JSONObject jsonObject) throws Exception {
+		
+		LiefernRepository.getInstance().clearOrderList();
+		
 		parse(jsonObject);
 		JSONArray array = jsonObject.getJSONArray(Constants.RESPONSE);
 		
@@ -56,7 +59,7 @@ public class RequestOrderResult extends WebServiceModel {
 		    	
 		    	if(packages.length() !=0){
 		    		for (int j = 0; j < packages.length(); j++) {
-		    		    JSONObject pack = array.getJSONObject(j);
+		    		    JSONObject pack = packages.getJSONObject(j);
 		    		    
 		    		    Packages packObject = new Packages();
 		    		    

@@ -311,6 +311,16 @@ public abstract class LiefernBaseActivity extends Activity {
     		startActivity(oRequestIntent);
     		break;
     		
+    	case SliderMenuListAdapter.DELIVERY:
+    		Intent oDeliveryIntent = new Intent(instance, DeliveryActivity.class);
+    		startActivity(oDeliveryIntent);
+    		break;
+    		
+    	case SliderMenuListAdapter.RECEIPT:
+    		Intent oReceiptIntent = new Intent(instance, ReceiptActivity.class);
+    		startActivity(oReceiptIntent);
+    		break;
+    		
     	default:
     		break;
     	}

@@ -11,6 +11,7 @@ import org.apache.http.entity.StringEntity;
 
 
 
+
 import android.net.Uri;
 import android.util.Log;
 
@@ -20,6 +21,7 @@ import com.liefern.webservices.models.LoginResult;
 import com.liefern.webservices.models.LogoutResult;
 import com.liefern.webservices.models.RequestOrderResult;
 import com.liefern.webservices.models.SignUpResult;
+import com.liefern.webservices.models.WebServiceModel;
 
 @SuppressWarnings("deprecation")
 public final class WebsevicesImpl {
@@ -56,9 +58,22 @@ public final class WebsevicesImpl {
 	
 	public RequestOrderResult requestOrder() throws Exception {
 		RequestOrderResult requestOrderResult = new RequestOrderResult();
-		HttpGet httpGet = new HttpGet(WebserviceURLs.REQUEST_ORDER_RESULT + LiefernRepository.getInstance().getLoggedInUser().getUserId());
+		HttpGet httpGet = new HttpGet( WebserviceURLs.REQUEST_ORDER_RESULT   + LiefernRepository.getInstance().getLoggedInUser().getUserId());
 		requestOrderResult.parseJSON(WebServiceHelper.executeRequest(httpGet,1));
 		return requestOrderResult;
 	}
 
+	public RequestOrderResult deliveryOrder() throws Exception {
+		RequestOrderResult requestOrderResult = new RequestOrderResult();
+		HttpGet httpGet = new HttpGet(  WebserviceURLs.DELIVERY_ORDER_RESULT  + LiefernRepository.getInstance().getLoggedInUser().getUserId());
+		requestOrderResult.parseJSON(WebServiceHelper.executeRequest(httpGet,1));
+		return requestOrderResult;
+	}
+
+	public RequestOrderResult receiptsOrder() throws Exception {
+		RequestOrderResult requestOrderResult = new RequestOrderResult();
+		HttpGet httpGet = new HttpGet(  WebserviceURLs.RECEIPT_ORDER_RESULT  + LiefernRepository.getInstance().getLoggedInUser().getUserId());
+		requestOrderResult.parseJSON(WebServiceHelper.executeRequest(httpGet,1));
+		return requestOrderResult;
+	}
 }

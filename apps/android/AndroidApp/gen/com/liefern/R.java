@@ -35,36 +35,42 @@ public final class R {
         public static final int user_icon=0x7f020007;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000f;
+        public static final int action_settings=0x7f080011;
         public static final int content_layout=0x7f080001;
-        public static final int delivery_title=0x7f080008;
+        public static final int delivery_title=0x7f08000a;
         public static final int drawer_layout=0x7f080000;
-        public static final int email_id=0x7f080003;
-        public static final int from_to_location=0x7f080009;
-        public static final int login=0x7f080005;
-        public static final int lstRequests=0x7f080007;
-        public static final int mobile_no=0x7f08000c;
-        public static final int name=0x7f08000b;
-        public static final int password=0x7f080004;
-        public static final int price=0x7f08000a;
-        public static final int sign_up=0x7f080006;
+        public static final int email_id=0x7f080004;
+        public static final int from_to_location=0x7f08000b;
+        public static final int login=0x7f080006;
+        public static final int lstDelivery=0x7f080003;
+        public static final int lstReceipts=0x7f080008;
+        public static final int lstRequests=0x7f080009;
+        public static final int mobile_no=0x7f08000e;
+        public static final int name=0x7f08000d;
+        public static final int password=0x7f080005;
+        public static final int price=0x7f08000c;
+        public static final int sign_up=0x7f080007;
         public static final int slider_list=0x7f080002;
-        public static final int slider_menu_icon=0x7f08000d;
-        public static final int slider_menu_text=0x7f08000e;
+        public static final int slider_menu_icon=0x7f08000f;
+        public static final int slider_menu_text=0x7f080010;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int login=0x7f030001;
-        public static final int main=0x7f030002;
-        public static final int request=0x7f030003;
-        public static final int request_list_item=0x7f030004;
-        public static final int sign_up=0x7f030005;
-        public static final int slider_menu_list_item=0x7f030006;
-        public static final int user_info_slider_menu_list_item=0x7f030007;
+        public static final int delivery=0x7f030001;
+        public static final int login=0x7f030002;
+        public static final int main=0x7f030003;
+        public static final int receipt=0x7f030004;
+        public static final int request=0x7f030005;
+        public static final int request_list_item=0x7f030006;
+        public static final int sign_up=0x7f030007;
+        public static final int slider_menu_list_item=0x7f030008;
+        public static final int user_info_slider_menu_list_item=0x7f030009;
     }
     public static final class menu {
-        public static final int main=0x7f070000;
-        public static final int request=0x7f070001;
+        public static final int delivery=0x7f070000;
+        public static final int main=0x7f070001;
+        public static final int receipt=0x7f070002;
+        public static final int request=0x7f070003;
     }
     public static final class string {
         public static final int action_settings=0x7f050002;
@@ -91,6 +97,8 @@ public final class R {
         public static final int request=0x7f050013;
         public static final int sign_up=0x7f050008;
         public static final int sign_up_underlined=0x7f050009;
+        public static final int title_activity_delivery=0x7f050017;
+        public static final int title_activity_receipt=0x7f050018;
         public static final int title_activity_request=0x7f050016;
     }
     public static final class style {

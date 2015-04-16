@@ -38,12 +38,20 @@
             android:name=".views.SignUpActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
-            android:name="com.liefern.views.RequestActivity"
+            android:name=".views.RequestActivity"
             android:label="@string/title_activity_request"
             android:parentActivityName=".views.LiefernBaseActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.liefern.views.LiefernBaseActivity" />
+        </activity>
+        <activity
+            android:name=".views.DeliveryActivity"
+            android:label="@string/title_activity_delivery" >
+        </activity>
+        <activity
+            android:name="com.liefern.views.ReceiptActivity"
+            android:label="@string/title_activity_receipt" >
         </activity>
     </application>
 

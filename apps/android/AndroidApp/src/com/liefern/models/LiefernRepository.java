@@ -56,6 +56,11 @@ public final class LiefernRepository {
 		requestOrderList.add(order);
 	}
 	
+	public void clearOrderList(){
+		requestOrderList.clear();
+	}
+	
+	
 	public List<Order> getRequestOrderList(){
 		return requestOrderList;
 	}

@@ -26,5 +26,7 @@
     <string name="drawer_open"></string>
     <string name="drawer_close"></string>
     <string name="title_activity_request">Request</string>
+    <string name="title_activity_delivery">Delivery</string>
+    <string name="title_activity_receipt">Receipts</string>
 
 </resources>
