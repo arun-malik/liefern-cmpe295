@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="53e6e3da-bfe0-48c1-b204-1c7b234f2695" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node-rest/common/models/address.js" afterPath="$PROJECT_DIR$/node-rest/common/models/address.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node-rest/common/models/address.json" afterPath="$PROJECT_DIR$/node-rest/common/models/address.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node-rest/server/config.json" afterPath="$PROJECT_DIR$/node-rest/server/config.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node-rest/common/models/geo.json" afterPath="$PROJECT_DIR$/node-rest/common/models/geo.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node-rest/common/models/liefernuser.js" afterPath="$PROJECT_DIR$/node-rest/common/models/liefernuser.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node-rest/common/models/liefernuser.json" afterPath="$PROJECT_DIR$/node-rest/common/models/liefernuser.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node-rest/common/models/order.js" afterPath="$PROJECT_DIR$/node-rest/common/models/order.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node-rest/common/models/order.json" afterPath="$PROJECT_DIR$/node-rest/common/models/order.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node-rest/common/models/package.js" afterPath="$PROJECT_DIR$/node-rest/common/models/package.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node-rest/common/models/package.json" afterPath="$PROJECT_DIR$/node-rest/common/models/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node-rest/common/models/payments.json" afterPath="$PROJECT_DIR$/node-rest/common/models/payments.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node-rest/common/models/ratemeterics.json" afterPath="$PROJECT_DIR$/node-rest/common/models/ratemeterics.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node-rest/common/models/travelerrating.js" afterPath="$PROJECT_DIR$/node-rest/common/models/travelerrating.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node-rest/common/models/travelerrating.json" afterPath="$PROJECT_DIR$/node-rest/common/models/travelerrating.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="53e6e3da-bfe0-48c1-b204-1c7b234f2695" name="Default" comment="" />
     <ignored path="liefern-cmpe295.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -103,7 +87,7 @@
       <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/node-rest/common/models/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.78971964" vertical-offset="1657" max-vertical-offset="2085">
+            <state vertical-scroll-proportion="4.661215" vertical-offset="0" max-vertical-offset="2085">
               <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
               <folding />
             </state>
@@ -774,7 +758,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/node-rest/common/models/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78971964" vertical-offset="1657" max-vertical-offset="2085">
+        <state vertical-scroll-proportion="4.661215" vertical-offset="0" max-vertical-offset="2085">
           <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
           <folding />
         </state>
