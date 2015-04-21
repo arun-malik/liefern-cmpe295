@@ -25,13 +25,13 @@ public class PaymentsActivity extends LiefernBaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_payments);
 
-		spinnerMonth = (Spinner)findViewById(R.id.spinnerMonth);
+	/*	spinnerMonth = (Spinner)findViewById(R.id.spinnerMonth);
 		ArrayAdapter<String>adapter = new ArrayAdapter<String>(PaymentsActivity.this,
 				android.R.layout.simple_spinner_item,months);
 
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerMonth.setAdapter(adapter);
-		spinnerMonth.setOnItemSelectedListener((OnItemSelectedListener) this);
+		spinnerMonth.setOnItemSelectedListener((OnItemSelectedListener) this);*/
 	}
 
 	public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
@@ -70,7 +70,7 @@ public class PaymentsActivity extends LiefernBaseActivity {
 	}
 
 	public void addPaymentsDialog(View view) {
-		final Dialog dialog = new Dialog(getBaseContext());
+		final Dialog dialog = new Dialog(PaymentsActivity.this);
 		dialog.setContentView(R.layout.activity_payments_add_card_dialog);
 		dialog.setTitle("Add Card");
 

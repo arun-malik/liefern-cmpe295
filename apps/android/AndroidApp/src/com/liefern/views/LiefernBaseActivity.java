@@ -324,6 +324,10 @@ public abstract class LiefernBaseActivity extends Activity {
 			Intent oUserInfoIntent = new Intent(instance, ProfileActivity.class);
 			startActivity(oUserInfoIntent);
 			break;
+		case SliderMenuListAdapter.PAYMENT:
+			Intent oPaymentIntent = new Intent(instance, PaymentsActivity.class);
+			startActivity(oPaymentIntent);
+			break;
 
 		default:
 			break;

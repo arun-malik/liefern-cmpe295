@@ -47,7 +47,7 @@ public class ShopperPage2Activity extends LiefernBaseActivity {
 	public void addPackagesButton(View view) {
 		// TODO Auto-generated method stub
 		// custom dialog
-		final Dialog dialog = new Dialog(getBaseContext());
+		final Dialog dialog = new Dialog(ShopperPage2Activity.this);
 		dialog.setContentView(R.layout.activity_shopper_add_package_dialog);
 		dialog.setTitle("Add Package");
 
