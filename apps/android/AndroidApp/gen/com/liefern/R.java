@@ -35,42 +35,96 @@ public final class R {
         public static final int user_icon=0x7f020007;
     }
     public static final class id {
-        public static final int action_settings=0x7f080011;
+        public static final int action_settings=0x7f080039;
+        public static final int addPackDialog=0x7f08001b;
+        public static final int addPackagesButton=0x7f080026;
+        public static final int addPayment=0x7f080005;
         public static final int content_layout=0x7f080001;
-        public static final int delivery_title=0x7f08000a;
+        public static final int delivery_title=0x7f080032;
         public static final int drawer_layout=0x7f080000;
-        public static final int email_id=0x7f080004;
-        public static final int from_to_location=0x7f08000b;
-        public static final int login=0x7f080006;
-        public static final int lstDelivery=0x7f080003;
-        public static final int lstReceipts=0x7f080008;
-        public static final int lstRequests=0x7f080009;
-        public static final int mobile_no=0x7f08000e;
-        public static final int name=0x7f08000d;
-        public static final int password=0x7f080005;
-        public static final int price=0x7f08000c;
-        public static final int sign_up=0x7f080007;
+        public static final int editText1=0x7f08000e;
+        public static final int editText10=0x7f080023;
+        public static final int editText11=0x7f080024;
+        public static final int editText12=0x7f080025;
+        public static final int editText2=0x7f08000b;
+        public static final int editText3=0x7f08000a;
+        public static final int editText4=0x7f08000c;
+        public static final int editText5=0x7f080012;
+        public static final int editText6=0x7f080017;
+        public static final int editText7=0x7f080016;
+        public static final int editText8=0x7f080018;
+        public static final int editText9=0x7f08001a;
+        public static final int email_id=0x7f08002a;
+        public static final int from_to_location=0x7f080033;
+        public static final int login=0x7f08002c;
+        public static final int lstDelivery=0x7f080029;
+        public static final int lstReceipts=0x7f080030;
+        public static final int lstRequests=0x7f080031;
+        public static final int mobile_no=0x7f080036;
+        public static final int name=0x7f080035;
+        public static final int nextShopperPage2=0x7f080022;
+        public static final int nextShopperPage3 =0x7f080027;
+        public static final int packageList=0x7f080004;
+        public static final int password=0x7f08002b;
+        public static final int placeOrderButton=0x7f080028;
+        public static final int price=0x7f080034;
+        public static final int ratingBar1=0x7f080011;
+        public static final int shopperButton=0x7f08002f;
+        public static final int sign_up=0x7f08002d;
         public static final int slider_list=0x7f080002;
-        public static final int slider_menu_icon=0x7f08000f;
-        public static final int slider_menu_text=0x7f080010;
+        public static final int slider_menu_icon=0x7f080037;
+        public static final int slider_menu_text=0x7f080038;
+        public static final int spinnerMonth=0x7f08000d;
+        public static final int textView1=0x7f080003;
+        public static final int textView10=0x7f08001c;
+        public static final int textView11=0x7f08001d;
+        public static final int textView12=0x7f08001e;
+        public static final int textView13=0x7f08001f;
+        public static final int textView14=0x7f080020;
+        public static final int textView15=0x7f080021;
+        public static final int textView2=0x7f080006;
+        public static final int textView3=0x7f080007;
+        public static final int textView4=0x7f080008;
+        public static final int textView5=0x7f080009;
+        public static final int textView6=0x7f080013;
+        public static final int textView7=0x7f080014;
+        public static final int textView8=0x7f080015;
+        public static final int textView9=0x7f080019;
+        public static final int travelerButton=0x7f08002e;
+        public static final int userImage=0x7f08000f;
+        public static final int userName=0x7f080010;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int delivery=0x7f030001;
-        public static final int login=0x7f030002;
-        public static final int main=0x7f030003;
-        public static final int receipt=0x7f030004;
-        public static final int request=0x7f030005;
-        public static final int request_list_item=0x7f030006;
-        public static final int sign_up=0x7f030007;
-        public static final int slider_menu_list_item=0x7f030008;
-        public static final int user_info_slider_menu_list_item=0x7f030009;
+        public static final int activity_payments=0x7f030001;
+        public static final int activity_payments_add_card_dialog=0x7f030002;
+        public static final int activity_profile=0x7f030003;
+        public static final int activity_shopper_add_package_dialog=0x7f030004;
+        public static final int activity_shopper_page1=0x7f030005;
+        public static final int activity_shopper_page2=0x7f030006;
+        public static final int activity_shopper_page3=0x7f030007;
+        public static final int activity_traveler=0x7f030008;
+        public static final int delivery=0x7f030009;
+        public static final int login=0x7f03000a;
+        public static final int main=0x7f03000b;
+        public static final int receipt=0x7f03000c;
+        public static final int request=0x7f03000d;
+        public static final int request_list_item=0x7f03000e;
+        public static final int sign_up=0x7f03000f;
+        public static final int slider_menu_list_item=0x7f030010;
+        public static final int user_info_slider_menu_list_item=0x7f030011;
     }
     public static final class menu {
         public static final int delivery=0x7f070000;
         public static final int main=0x7f070001;
-        public static final int receipt=0x7f070002;
-        public static final int request=0x7f070003;
+        public static final int payments=0x7f070002;
+        public static final int profile=0x7f070003;
+        public static final int receipt=0x7f070004;
+        public static final int request=0x7f070005;
+        public static final int shopper_page1=0x7f070006;
+        public static final int shopper_page2=0x7f070007;
+        public static final int shopper_page3=0x7f070008;
+        public static final int traveler=0x7f070009;
     }
     public static final class string {
         public static final int action_settings=0x7f050002;
@@ -98,8 +152,14 @@ public final class R {
         public static final int sign_up=0x7f050008;
         public static final int sign_up_underlined=0x7f050009;
         public static final int title_activity_delivery=0x7f050017;
+        public static final int title_activity_payments=0x7f05001e;
+        public static final int title_activity_profile=0x7f05001d;
         public static final int title_activity_receipt=0x7f050018;
         public static final int title_activity_request=0x7f050016;
+        public static final int title_activity_shopper_page1=0x7f05001a;
+        public static final int title_activity_shopper_page2=0x7f05001b;
+        public static final int title_activity_shopper_page3=0x7f05001c;
+        public static final int title_activity_traveler=0x7f050019;
     }
     public static final class style {
         /** 

@@ -4,17 +4,45 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ScrollView
-        style="@style/ParentLayout"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fadeScrollbars="true" >
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/travelerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="34dp"
+            android:layout_marginLeft="41dp"
+            android:onClick="loadTravelerActivity"
+            android:text="Traveler" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello" />
-    </ScrollView>
+            android:layout_above="@+id/shopperButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="35dp"
+            android:text="Please select Role"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Button
+            android:id="@+id/shopperButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/travelerButton"
+            android:layout_alignBottom="@+id/travelerButton"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="37dp"
+            android:onClick="loadShopperActivity"
+            android:text="Shopper" />
+
+    </RelativeLayout>
+    
 
 </LinearLayout>
+

@@ -28,5 +28,11 @@
     <string name="title_activity_request">Request</string>
     <string name="title_activity_delivery">Delivery</string>
     <string name="title_activity_receipt">Receipts</string>
+    <string name="title_activity_traveler">TravelerActivity</string>
+    <string name="title_activity_shopper_page1">ShopperPage1Activity</string>
+    <string name="title_activity_shopper_page2">ShopperPage2Activity</string>
+    <string name="title_activity_shopper_page3">ShopperPage3Activity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_payments">PaymentsActivity</string>
 
 </resources>

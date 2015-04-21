@@ -50,8 +50,32 @@
             android:label="@string/title_activity_delivery" >
         </activity>
         <activity
-            android:name="com.liefern.views.ReceiptActivity"
+            android:name=".views.ReceiptActivity"
             android:label="@string/title_activity_receipt" >
+        </activity>
+        <activity
+            android:name=".views.TravelerActivity"
+            android:label="@string/title_activity_traveler" >
+        </activity>
+        <activity
+            android:name=".views.ShopperPage1Activity"
+            android:label="@string/title_activity_shopper_page1" >
+        </activity>
+        <activity
+            android:name=".views.ShopperPage2Activity"
+            android:label="@string/title_activity_shopper_page2" >
+        </activity>
+        <activity
+            android:name=".views.ShopperPage3Activity"
+            android:label="@string/title_activity_shopper_page3" >
+        </activity>
+        <activity
+            android:name=".views.ProfileActivity"
+            android:label="@string/title_activity_profile" >
+        </activity>
+        <activity
+            android:name="com.liefern.views.PaymentsActivity"
+            android:label="@string/title_activity_payments" >
         </activity>
     </application>
 
