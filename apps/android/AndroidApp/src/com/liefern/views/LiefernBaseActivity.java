@@ -305,6 +305,11 @@ public abstract class LiefernBaseActivity extends Activity {
 			Intent oLogoutIntent = new Intent(instance, LogoutActivity.class);
 			startActivityForResult(oLogoutIntent, LOGOUT_INTENT_REQUEST_ID);
 			break;
+			
+		case SliderMenuListAdapter.HOME:
+			Intent oHomeIntent = new Intent(instance, MainActivity.class);
+			startActivity(oHomeIntent);
+			break;
 
 		case SliderMenuListAdapter.REQUEST:
 			Intent oRequestIntent = new Intent(instance, RequestActivity.class);

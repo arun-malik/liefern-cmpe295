@@ -2,9 +2,14 @@ package com.liefern.models;
 
 import java.util.Date;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.liefern.constants.Constants;
+
 public class Address {
 	
-	  private int addressId;
+	  private int addressId = -1;
 	  private String address1;
 	  private String address2;
 	  private String city;
@@ -148,5 +153,22 @@ public class Address {
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
+	
+	public JSONObject toJSON() throws JSONException {
+		JSONObject jsonObject = new JSONObject();
+		if(this.getAddressId() != -1)
+			jsonObject.put(Constants.ADDRESS_ID, this.getAddressId());
+		
+		jsonObject.put(Constants.ADDRESS1, this.getAddress1());
+		jsonObject.put(Constants.ADDRESS2, this.getAddress2());
+		jsonObject.put(Constants.CITY, this.getCity());
+		jsonObject.put(Constants.STATE, this.getState());
+		jsonObject.put(Constants.COUNTRY, this.getCountry());
+		jsonObject.put(Constants.ZIP, this.getZip());
+		jsonObject.put(Constants.HOME, this.getHome());
+		
+		return jsonObject;
+	}
+	 
 
 }

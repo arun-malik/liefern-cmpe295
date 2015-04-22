@@ -1,8 +1,13 @@
 package com.liefern.models;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.liefern.constants.Constants;
+
 public class Packages {
 
-	 private int packageId;
+	 private int packageId = -1;
 	 private int orderId;
 	 private int weight;
 	 private String size;
@@ -94,6 +99,20 @@ public class Packages {
 	 */
 	public void setIsFragile(Boolean isFragile) {
 		this.isFragile = isFragile;
+	}
+	
+	public JSONObject toJSON() throws JSONException {
+		JSONObject jsonObject = new JSONObject();
+		if(this.getPackageId() != -1)
+			jsonObject.put(Constants.PACKAGE_ID, this.getPackageId());
+		jsonObject.put(Constants.ORDER_ID, this.getOrderId());
+		jsonObject.put(Constants.WEIGHT, this.getWeight());
+		jsonObject.put(Constants.SIZE, this.getSize());
+		jsonObject.put(Constants.DESCRIPTION, this.getDescription());
+		jsonObject.put(Constants.CONTENT, this.getContent());
+		jsonObject.put(Constants.IS_FRAGILE, this.getIsFragile());
+		
+		return jsonObject;
 	}
 	 
 }

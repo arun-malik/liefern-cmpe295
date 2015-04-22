@@ -17,6 +17,7 @@ public final class LiefernRepository {
 	private User loggedInUser;
 	private String authToken;
 	private List<Order> requestOrderList = new ArrayList<Order>();
+	private Order builtOrder = new Order(); 
 	
 	private LiefernRepository() {}
 	
@@ -75,6 +76,14 @@ public final class LiefernRepository {
 		this.loggedInUser.setMobile(responseJson.optString(Constants.MOBILE));
 		this.loggedInUser.setName(responseJson.optString(Constants.NAME));
 		this.loggedInUser.setUserId(responseJson.optInt(Constants.USEER_ID));
+	}
+
+	public Order getBuiltOrder() {
+		return builtOrder;
+	}
+
+	public void setBuiltOrder(Order builtOrder) {
+		this.builtOrder = builtOrder;
 	}
 	
 //	public void createRequestOrderResult(JSONObject json){

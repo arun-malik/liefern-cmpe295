@@ -1,8 +1,10 @@
 package com.liefern.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,7 +18,7 @@ public class Order {
 	private int fromLoc;
 	private int toLoc;
 	private int customerId;
-	private int travlerId;
+	private int travlerId = -1;
 	private int distance;
 	private int suggestAmount;
 	private int customerAmount;
@@ -198,11 +200,20 @@ public class Order {
 		jsonObject.put(Constants.SUGGEST_AMOUNT, this.getSuggestAmount());
 		jsonObject.put(Constants.CUSTOMER_AMOUNT, this.getCustomerAmount());
 		jsonObject.put(Constants.CUSTOMER_ID, this.getCustomerId());
-		jsonObject.put(Constants.TRAVLER_ID, this.getTravlerId());
+		if(this.getTravlerId() != -1)
+			jsonObject.put(Constants.TRAVLER_ID, this.getTravlerId());
 		jsonObject.put(Constants.TIME_TO_LIVE, this.getTimeToLive());
 		jsonObject.put(Constants.CREATE_DATE, this.getCreatedDate());
 		jsonObject.put(Constants.MODIFIED_DATE, this.getModifiedDate());
+		jsonObject.put(Constants.FROM_LOCATION_OBJECT, this.getFromlocation().toJSON());
+		jsonObject.put(Constants.TO_LOCATION_OBJECT, this.getTolocation().toJSON());
 		
+		List<Packages> packages = this.getPackages();
+		JSONArray packageArray = new JSONArray();
+		for(Packages p: packages){
+			packageArray.put(p.toJSON());		
+		}
+		jsonObject.put(Constants.PACKAGES_ARRAY, packageArray);
 		return jsonObject;
 	}
 	/**
@@ -264,6 +275,13 @@ public class Order {
 	 */
 	public void setPackages(List<Packages> packages) {
 		this.packages = packages;
+	}
+	
+	public void addPackage(Packages packages) {
+		if(this.packages == null) {
+			this.packages = new ArrayList<Packages>();
+		}
+		this.packages.add(packages);
 	}
 	
 }

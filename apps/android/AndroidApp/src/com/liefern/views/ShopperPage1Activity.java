@@ -1,6 +1,12 @@
 package com.liefern.views;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.liefern.R;
+import com.liefern.models.Address;
+import com.liefern.models.LiefernRepository;
 import com.liefern.webservices.models.WebServiceModel;
 
 import android.content.Intent;
@@ -8,8 +14,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 public class ShopperPage1Activity extends LiefernBaseActivity {
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +44,60 @@ public class ShopperPage1Activity extends LiefernBaseActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	public void nextShopperPage2Button(View view) {
-		  Intent intent = new Intent(this, ShopperPage2Activity.class);
-		  startActivity(intent);
+		Address toAddress = new Address();
+		EditText text = (EditText) findViewById(R.id.toAddress1Text);
+		toAddress.setAddress1( text.getText().toString() );
+		text = (EditText) findViewById(R.id.toAddress2Text);
+		toAddress.setAddress2( text.getText().toString() );
+		text = (EditText) findViewById(R.id.toCityText);
+		toAddress.setCity( text.getText().toString() );
+		text = (EditText) findViewById(R.id.toCountryText);
+		toAddress.setCountry( text.getText().toString() );
+		text = (EditText) findViewById(R.id.toCountryText);
+		toAddress.setCountry( text.getText().toString() );
+		text = (EditText) findViewById(R.id.toZipText);
+		if(text.getText().toString()!= null && !text.getText().toString().isEmpty()){
+			toAddress.setZip( Integer.parseInt(text.getText().toString()) );
 		}
+		
+		try {
+			toAddress.setCreatedDate(sdf.parse(sdf.format(new Date())));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Address fromAddress = new Address();
+		text = (EditText) findViewById(R.id.fromAddress1Text);
+		fromAddress.setAddress1( text.getText().toString() );
+		text = (EditText) findViewById(R.id.fromAddress2Text);
+		fromAddress.setAddress2( text.getText().toString() );
+		text = (EditText) findViewById(R.id.fromCityText);
+		fromAddress.setCity( text.getText().toString() );
+		text = (EditText) findViewById(R.id.fromCountryText);
+		fromAddress.setCountry( text.getText().toString() );
+		text = (EditText) findViewById(R.id.fromCountryText);
+		fromAddress.setCountry( text.getText().toString() );
+		text = (EditText) findViewById(R.id.fromZipText);
+		if(text.getText().toString()!= null && !text.getText().toString().isEmpty()){
+			fromAddress.setZip( Integer.valueOf(text.getText().toString()) ); 
+		}
+
+		try {
+			fromAddress.setCreatedDate(sdf.parse(sdf.format(new Date())));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		LiefernRepository.getInstance().getBuiltOrder().setTolocation(toAddress);
+		LiefernRepository.getInstance().getBuiltOrder().setFromlocation(fromAddress);
+
+		Intent intent = new Intent(this, ShopperPage2Activity.class);
+		startActivity(intent);
+	}
 
 	@Override
 	public WebServiceModel processService() throws Exception {
@@ -50,12 +108,12 @@ public class ShopperPage1Activity extends LiefernBaseActivity {
 	@Override
 	public void notifyWebResponse(WebServiceModel model) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void notifyWebResponseError(WebServiceModel model) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

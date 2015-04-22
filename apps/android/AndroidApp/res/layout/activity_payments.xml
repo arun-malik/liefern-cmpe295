@@ -18,7 +18,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
     
     <ListView
-        android:id="@+id/packageList"
+        android:id="@+id/cardList"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
         android:layout_below="@+id/textView1"

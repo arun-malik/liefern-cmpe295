@@ -18,4 +18,6 @@ public interface WebserviceURLs {
 			+ "filter[include]=packages&filter[include]=customer&filter[include]=traveler"
 			+ "&filter[where][orderStatus][inq]=2&filter[where][orderStatus][inq]=3&filter[where][orderStatus][inq]=4&filter[where][orderStatus][inq]=5"
 			+ "&filter[where][customerid]=";
+	
+	String POST_ORDER_URL = BASE_URL + "Orders/saveAll/";
 }

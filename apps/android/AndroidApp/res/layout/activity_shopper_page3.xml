@@ -70,7 +70,7 @@
         android:text="Place Order" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/totalMilesText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView2"
@@ -82,27 +82,27 @@
     </EditText>
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/totalWeightText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView4"
-        android:layout_alignLeft="@+id/editText1"
+        android:layout_alignLeft="@+id/totalMilesText"
         android:ems="10" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/recommendedCostText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView4"
         android:layout_alignBottom="@+id/textView4"
-        android:layout_alignLeft="@+id/editText2"
+        android:layout_alignLeft="@+id/totalWeightText"
         android:ems="10" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/shopperQuoteCostText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText3"
+        android:layout_alignLeft="@+id/recommendedCostText"
         android:layout_centerVertical="true"
         android:ems="10"
         android:inputType="numberDecimal" />

@@ -29,7 +29,7 @@ public class RequestListAdapter extends BaseAdapter {
 		this.list = list;
 		this.requestType = requestType;
 	}
-
+	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -66,27 +66,27 @@ public class RequestListAdapter extends BaseAdapter {
 			try {
 				TextView deliveryTitle = (TextView) convertView
 						.findViewById(R.id.delivery_title);
-				
+
 				deliveryTitle.setText("Order Identifier : " + Integer.toString(list.get(position).getOrderId()));
 
 				TextView fromToLocation = (TextView) convertView
 						.findViewById(R.id.from_to_location);
-				
+
 				fromToLocation.setText( list.get(position).getFromlocation().getCity() + " - "
 						+  list.get(position).getTolocation().getCity() );
 
 				TextView price = (TextView) convertView
 						.findViewById(R.id.price);
-				
+
 				price.setText(Integer.toString(list.get(position).getCustomerAmount()));
-				
+
 			} catch (Exception ex) {
 				Log.d("Arun Malik","Exception : "+ ex.getMessage());
-				
+
 			}
 
 		}
-
+		
 		return convertView;
 	}
 

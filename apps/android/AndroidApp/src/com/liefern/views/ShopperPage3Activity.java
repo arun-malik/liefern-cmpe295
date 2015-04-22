@@ -1,6 +1,12 @@
 package com.liefern.views;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.liefern.R;
+import com.liefern.models.LiefernRepository;
+import com.liefern.webservices.impl.WebsevicesImpl;
 import com.liefern.webservices.models.WebServiceModel;
 
 import android.content.Intent;
@@ -8,8 +14,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class ShopperPage3Activity extends LiefernBaseActivity {
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,25 +47,60 @@ public class ShopperPage3Activity extends LiefernBaseActivity {
 	}
 
 	public void placeOrder(View view) {
-		Intent intent = new Intent(this, MainActivity.class);
-		startActivity(intent);
+		LiefernRepository.getInstance().getBuiltOrder().setCustomerId(LiefernRepository.getInstance().getLoggedInUser().getUserId());
+		LiefernRepository.getInstance().getBuiltOrder().setOrderType(1);
+		LiefernRepository.getInstance().getBuiltOrder().setOrderStatus(0);
+		try {
+			LiefernRepository.getInstance().getBuiltOrder().setCreatedDate(sdf.parse(sdf.format(new Date())));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		EditText text = (EditText) findViewById(R.id.totalMilesText);
+		if(text.getText().toString()!= null && !text.getText().toString().isEmpty()){
+			LiefernRepository.getInstance().getBuiltOrder().setDistance(Integer.parseInt(text.getText().toString()));
+		}
+
+		text = (EditText) findViewById(R.id.recommendedCostText);
+		if(text.getText().toString()!= null && !text.getText().toString().isEmpty()){
+			LiefernRepository.getInstance().getBuiltOrder().setSuggestAmount(Integer.parseInt(text.getText().toString()));;
+		}
+
+		text = (EditText) findViewById(R.id.shopperQuoteCostText);
+		if(text.getText().toString()!= null && !text.getText().toString().isEmpty()){
+			LiefernRepository.getInstance().getBuiltOrder().setCustomerAmount(Integer.parseInt(text.getText().toString()));;
+		}
+
+		execute();
+
+		/*		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);*/
+
+
 	}
 
 	@Override
 	public WebServiceModel processService() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		WebsevicesImpl wsImpl = new WebsevicesImpl();
+		return wsImpl.postOrder(LiefernRepository.getInstance().getBuiltOrder());
 	}
 
 	@Override
 	public void notifyWebResponse(WebServiceModel model) {
-		// TODO Auto-generated method stub
+		Toast.makeText(getApplicationContext(), "Request Placed Successfully !",
+				Toast.LENGTH_LONG).show();
+		Intent intent = new Intent(this, RequestActivity.class);
+		startActivity(intent);
 		
+
 	}
 
 	@Override
 	public void notifyWebResponseError(WebServiceModel model) {
-		// TODO Auto-generated method stub
-		
+		Toast.makeText(getApplicationContext(), "Sorry, error in placing your request. Please try again !",
+				Toast.LENGTH_LONG).show();
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
+
 	}
 }

@@ -17,9 +17,10 @@ public class SliderMenuListAdapter extends BaseAdapter {
 	public static final String REQUEST = "REQUEST";
 	public static final String PAYMENT = "PAYMENT";
 	public static final String LOGOUT = "LOGOUT";
+	public static final String HOME = "HOME";
 	
 	private Context context;
-	public static final String sliderMenuItems[] = {USER_INFO, REQUEST, DELIVERY, RECEIPT, PAYMENT, LOGOUT};
+	public static final String sliderMenuItems[] = {USER_INFO, HOME, REQUEST, DELIVERY, RECEIPT, PAYMENT, LOGOUT};
 	private static final int sliderMenuIcons[] = {}; 
 	private static SliderMenuListAdapter instance;
 	private static final Object obj = new Object();

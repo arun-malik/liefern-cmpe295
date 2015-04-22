@@ -12,13 +12,17 @@ import org.apache.http.entity.StringEntity;
 
 
 
+
+
 import android.net.Uri;
 import android.util.Log;
 
 import com.liefern.models.LiefernRepository;
+import com.liefern.models.Order;
 import com.liefern.models.User;
 import com.liefern.webservices.models.LoginResult;
 import com.liefern.webservices.models.LogoutResult;
+import com.liefern.webservices.models.PostOrderResult;
 import com.liefern.webservices.models.RequestOrderResult;
 import com.liefern.webservices.models.SignUpResult;
 import com.liefern.webservices.models.WebServiceModel;
@@ -54,6 +58,14 @@ public final class WebsevicesImpl {
 			LiefernRepository.getInstance().setLoggedInUser(null);
 		}
 		return logoutResult;
+	}
+	
+	public PostOrderResult postOrder(Order order) throws Exception {
+		PostOrderResult postOrderResult = new PostOrderResult();
+		HttpPost httpPost = new HttpPost(WebserviceURLs.POST_ORDER_URL);
+		httpPost.setEntity(new StringEntity(order.toJSON().toString()));
+		postOrderResult.parseJSON(WebServiceHelper.executeRequest(httpPost,0));
+		return postOrderResult;
 	}
 	
 	public RequestOrderResult requestOrder() throws Exception {
