@@ -65,6 +65,7 @@ module.exports = function(Order) {
                 }
                 //var fromLocationAddressId = res.addressid;
                 data.fromloc = res.addressid;
+                data.fromlocation.addressid = res.addressid;
 
                 if(null !=  data.tolocation){
 
@@ -74,6 +75,7 @@ module.exports = function(Order) {
                         }
                         //var toLocationAddressId = res.addressid;
                         data.toloc = res.addressid;
+                        data.tolocation.addressid = res.addressid;
 
                         Order.create(data, function(err,res){
                             if(err){
