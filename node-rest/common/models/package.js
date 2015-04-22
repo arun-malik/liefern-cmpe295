@@ -69,4 +69,29 @@ module.exports = function(Package) {
 
         });
     };
+
+    module.exports.savePackages =  function (packagesArray,orderid,callback) {
+
+        packagesArray.forEach(function(entry){
+            entry.orderid = orderid;
+        });
+
+        if(packagesArray === null){
+            callback(new Error("Invalid address"),null);
+        }else{
+
+             packagesArray.every(function(element, index, array) {
+
+                Package.create(array,function(err,res) {
+                    if(err){
+                        callback(new Error(err),null);
+                    }
+                    callback(null,res);
+                });
+
+            });
+
+
+        }
+    }
 };

@@ -1,6 +1,8 @@
 var Liefernuser = require('./liefernuser');
 var Package = require('./package');
 var server = require('../../server/server');
+var Address = require('./address');
+var Package = require('./package');
 
 module.exports = function(Order) {
 
@@ -32,6 +34,16 @@ module.exports = function(Order) {
     //    }
     //});
 
+    Order.remoteMethod(
+        'saveOrder',
+        {
+            accepts: { arg: 'data', type: 'object', http: { source: 'body' } },
+            returns : {arg: 'response', type: 'object'},
+            http: {path: '/saveAll', verb:'POST'},
+            description : 'API will be used to get all request made by customer.'
+        }
+    );
+
 
     Order.remoteMethod(
         'getCustomerDetails',
@@ -43,8 +55,59 @@ module.exports = function(Order) {
         }
     );
 
+    Order.saveOrder = function(data,callback) {
 
-    Order.getCustomerDetails = function(id,callback){
+        if(null !=  data.fromlocation){
+
+            Address.saveAddress(data.fromlocation,function(err,res) {
+                if(err){
+                    callback(new Error(err));
+                }
+                //var fromLocationAddressId = res.addressid;
+                data.fromloc = res.addressid;
+
+                if(null !=  data.tolocation){
+
+                    Address.saveAddress(data.tolocation,function(err,res) {
+                        if(err){
+                            callback(new Error(err));
+                        }
+                        //var toLocationAddressId = res.addressid;
+                        data.toloc = res.addressid;
+
+                        Order.create(data, function(err,res){
+                            if(err){
+                                callback(new Error(err),null);
+                            }
+
+                            var orderId = res.orderid;
+                            data.orderid = orderId;
+
+                            if(data.packages.length > 0 ){
+
+                                Package.savePackages(data.packages,orderId,function(err,res) {
+                                    if(err){
+                                        callback(new Error(err));
+                                    }
+
+                                    for (index = 0; index < res.length; ++index) {
+                                        data.packages[index].packageid = res[index].packageid;
+                                    }
+
+                                    callback(null,data);
+                                });
+                            }
+
+                        });
+
+                    });
+                }
+            });
+        }
+    }
+
+
+        Order.getCustomerDetails = function(id,callback){
 
         var customerId = id;
 
