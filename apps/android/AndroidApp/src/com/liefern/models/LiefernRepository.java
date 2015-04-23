@@ -18,7 +18,8 @@ public final class LiefernRepository {
 	private String authToken;
 	private List<Order> requestOrderList = new ArrayList<Order>();
 	private Order builtOrder = new Order(); 
-	
+	private List<Payments> paymentCardList = new ArrayList<Payments>();
+	private Payments newCard;
 	private LiefernRepository() {}
 	
 	public static LiefernRepository getInstance() {
@@ -85,6 +86,31 @@ public final class LiefernRepository {
 	public void setBuiltOrder(Order builtOrder) {
 		this.builtOrder = builtOrder;
 	}
+
+	public List<Payments> getPaymentCardList() {
+		return paymentCardList;
+	}
+
+	public void setPaymentCardList(List<Payments> paymentCardList) {
+		this.paymentCardList = paymentCardList;
+	}
+	
+	public void addPaymentCard(Payments paymentCard) {
+		this.paymentCardList.add(paymentCard);
+	}
+	
+	public void clearPaymentCardList(){
+		this.paymentCardList.clear();
+	}
+
+	public Payments getNewCard() {
+		return newCard;
+	}
+
+	public void setNewCard(Payments newCard) {
+		this.newCard = newCard;
+	}
+	
 	
 //	public void createRequestOrderResult(JSONObject json){
 //		try {

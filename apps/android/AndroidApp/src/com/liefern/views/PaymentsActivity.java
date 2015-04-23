@@ -1,54 +1,41 @@
 package com.liefern.views;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import com.liefern.R;
+import com.liefern.models.LiefernRepository;
+import com.liefern.models.Payments;
+import com.liefern.webservices.impl.WebsevicesImpl;
 import com.liefern.webservices.models.WebServiceModel;
-
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
+import android.widget.EditText;
+import android.widget.ListView;
 
 public class PaymentsActivity extends LiefernBaseActivity {
-
-	private Spinner spinnerMonth;
-	private static final String[]months = {"Jan", "Feb", "Mar" , "Apr", "May", "Jun","July","Aug","Sep","Oct","Nov", "Dec"};
+	
+	@SuppressLint("SimpleDateFormat")
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
+	BaseAdapter adaptor;
+	private ListView lstRequests;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_payments);
-
-	/*	spinnerMonth = (Spinner)findViewById(R.id.spinnerMonth);
-		ArrayAdapter<String>adapter = new ArrayAdapter<String>(PaymentsActivity.this,
-				android.R.layout.simple_spinner_item,months);
-
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerMonth.setAdapter(adapter);
-		spinnerMonth.setOnItemSelectedListener((OnItemSelectedListener) this);*/
+		lstRequests = (ListView) findViewById(R.id.cardList);
+		execute();
 	}
 
-	public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-
-		switch (position) {
-		case 0:
-			// Whatever you want to happen when the first item gets selected
-			break;
-		case 1:
-			// Whatever you want to happen when the second item gets selected
-			break;
-		case 2:
-			// Whatever you want to happen when the thrid item gets selected
-			break;
-
-		}
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,13 +62,46 @@ public class PaymentsActivity extends LiefernBaseActivity {
 		dialog.setTitle("Add Card");
 
 
-		Button dialogButton = (Button) dialog.findViewById(R.id.addPayment);
+		Button dialogButton = (Button) dialog.findViewById(R.id.dialogAddPaymentButton);
 		// if button is clicked, close the custom dialog
 		dialogButton.setOnClickListener( new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				Payments card = new Payments();
+				EditText text = (EditText) dialog.findViewById(R.id.cardNumberText);
+				if(text.getText().toString()!= null && !text.getText().toString().isEmpty()){
+					card.setCreditCardNo(Integer.parseInt(text.getText().toString().trim()) );
+				}	
+				text = (EditText) dialog.findViewById(R.id.expireMonthText);
+				if(text.getText().toString()!= null && !text.getText().toString().isEmpty()){
+					card.setExpiryMonth(Integer.parseInt(text.getText().toString().trim()) );
+				}
+				text = (EditText) dialog.findViewById(R.id.expireYearText);
+				if(text.getText().toString()!= null && !text.getText().toString().isEmpty()){
+					card.setExpiryYear(Integer.parseInt(text.getText().toString().trim()) );
+				}
+				
+				text = (EditText) dialog.findViewById(R.id.securityCodeText);
+				if(text.getText().toString()!= null && !text.getText().toString().isEmpty()){
+					card.setCvv(Integer.parseInt(text.getText().toString().trim()) );
+				}
+				text = (EditText) dialog.findViewById(R.id.nameOnCardText);
+				card.setNameOnCard(text.getText().toString().trim());
+				
+				card.setUserId(LiefernRepository.getInstance().getLoggedInUser().getUserId());
+				
+				try {
+					card.setCreatedDate(sdf.parse(sdf.format(new Date())));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				LiefernRepository.getInstance().setNewCard(card);
+				//LiefernRepository.getInstance().addPaymentCard(card);
+				execute();
 				dialog.dismiss();
 			}
 		});
@@ -91,14 +111,21 @@ public class PaymentsActivity extends LiefernBaseActivity {
 
 	@Override
 	public WebServiceModel processService() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		WebsevicesImpl wsImpl = new WebsevicesImpl();
+		//Integer i = (Integer) getRequestType();
+		//if(i.intValue() == 1) {
+		if(LiefernRepository.getInstance().getNewCard() == null){
+			return wsImpl.requestPaymentCards();
+		} else {
+			return wsImpl.postPaymentCard(LiefernRepository.getInstance().getNewCard());
+		}
 	}
 
 	@Override
 	public void notifyWebResponse(WebServiceModel model) {
-		// TODO Auto-generated method stub
-
+		 adaptor = new PaymentCardListAdaptor(this, R.layout.request_list_item, LiefernRepository.getInstance().getPaymentCardList());
+	     lstRequests.setAdapter(adaptor);
+	     LiefernRepository.getInstance().setNewCard(null);
 	}
 
 	@Override

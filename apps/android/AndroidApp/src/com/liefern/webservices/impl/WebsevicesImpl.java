@@ -14,15 +14,21 @@ import org.apache.http.entity.StringEntity;
 
 
 
+
+import org.json.JSONObject;
+
 import android.net.Uri;
 import android.util.Log;
 
 import com.liefern.models.LiefernRepository;
 import com.liefern.models.Order;
+import com.liefern.models.Payments;
 import com.liefern.models.User;
 import com.liefern.webservices.models.LoginResult;
 import com.liefern.webservices.models.LogoutResult;
+import com.liefern.webservices.models.PaymentCardResult;
 import com.liefern.webservices.models.PostOrderResult;
+import com.liefern.webservices.models.PostPaymentCardResult;
 import com.liefern.webservices.models.RequestOrderResult;
 import com.liefern.webservices.models.SignUpResult;
 import com.liefern.webservices.models.WebServiceModel;
@@ -73,6 +79,21 @@ public final class WebsevicesImpl {
 		HttpGet httpGet = new HttpGet( WebserviceURLs.REQUEST_ORDER_RESULT   + LiefernRepository.getInstance().getLoggedInUser().getUserId());
 		requestOrderResult.parseJSON(WebServiceHelper.executeRequest(httpGet,1));
 		return requestOrderResult;
+	}
+	
+	public PaymentCardResult requestPaymentCards() throws Exception {
+		PaymentCardResult requestPaymentCardsResult = new PaymentCardResult();
+		HttpGet httpGet = new HttpGet( WebserviceURLs.REQUEST_PAYMENT_CARD_RESULT   + LiefernRepository.getInstance().getLoggedInUser().getUserId());
+		requestPaymentCardsResult.parseJSON(WebServiceHelper.executeRequest(httpGet,1));
+		return requestPaymentCardsResult;
+	}
+	
+	public PostPaymentCardResult postPaymentCard(Payments card) throws Exception {
+		PostPaymentCardResult postPaymentCardResult = new PostPaymentCardResult();
+		HttpPost httpPost = new HttpPost(WebserviceURLs.POST_PAYMENT_CARD_URL);
+		httpPost.setEntity(new StringEntity(card.toJSON().toString()));
+		postPaymentCardResult.parseJSON(WebServiceHelper.executeRequest(httpPost,0));
+		return postPaymentCardResult;
 	}
 
 	public RequestOrderResult deliveryOrder() throws Exception {

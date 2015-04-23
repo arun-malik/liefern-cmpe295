@@ -26,7 +26,7 @@ public class PostOrderResult extends WebServiceModel {
 	@Override
 	public void parseJSON(JSONObject jsonObject) throws Exception {
 
-		LiefernRepository.getInstance().clearOrderList();
+		//LiefernRepository.getInstance().clearOrderList();
 
 		parse(jsonObject);
 		JSONObject row = jsonObject.getJSONObject(Constants.RESPONSE);

@@ -19,5 +19,9 @@ public interface WebserviceURLs {
 			+ "&filter[where][orderStatus][inq]=2&filter[where][orderStatus][inq]=3&filter[where][orderStatus][inq]=4&filter[where][orderStatus][inq]=5"
 			+ "&filter[where][customerid]=";
 	
+	String REQUEST_PAYMENT_CARD_RESULT = BASE_URL + "payments/?filter[where][userid]=";
+	
 	String POST_ORDER_URL = BASE_URL + "Orders/saveAll/";
+	
+	String POST_PAYMENT_CARD_URL = BASE_URL + "payments";
 }

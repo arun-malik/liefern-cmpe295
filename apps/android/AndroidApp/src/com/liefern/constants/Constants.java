@@ -51,4 +51,13 @@ public interface Constants {
 	String HOME ="home";
 	String SESSION_TOKEN ="sessiontoken";
 	
+	String PAYMENT_ID = "paymentid";
+	String CREDIT_CARD_NO = "creditcard";
+	String CVV = "cvv";
+	String EXPIRY_MONTH = "expirymonth";
+	String EXPIRY_YEAR = "expiryyear";
+	String NAME_ON_CARD = "nameoncard";
+	
+			
+	
 }

@@ -77,6 +77,10 @@
             android:name="com.liefern.views.PaymentsActivity"
             android:label="@string/title_activity_payments" >
         </activity>
+        <activity
+            android:name=".views.ViewRequest"/>
+        <activity
+            android:name=".views.ViewRequestUser"/>
     </application>
 
 </manifest>
