@@ -245,7 +245,6 @@
       "model": "Liefernuser",
       "foreignKey": "travlerid"
     }
-
   },
   "acls": [],
   "methods": []

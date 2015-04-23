@@ -29,11 +29,11 @@
     "dataSource": "db",
     "public": true
   },
-  "Payments": {
+  "Liefernuser": {
     "dataSource": "db",
     "public": true
   },
-  "Liefernuser": {
+  "Payments": {
     "dataSource": "db",
     "public": true
   }

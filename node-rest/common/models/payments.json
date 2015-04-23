@@ -10,8 +10,8 @@
     "paymentid": {
       "type": "Number",
       "id": true,
-      "generated": true,
       "required": false,
+      "generated": true,
       "length": null,
       "precision": 10,
       "scale": 0,
@@ -73,18 +73,34 @@
       },
       "_selectable": true
     },
-    "expirydate": {
-      "type": "Date",
+    "expirymonth": {
+      "type": "Number",
       "required": false,
       "length": null,
-      "precision": null,
-      "scale": null,
+      "precision": 10,
+      "scale": 0,
       "mysql": {
-        "columnName": "expiryDate",
-        "dataType": "date",
+        "columnName": "expiryMonth",
+        "dataType": "int",
         "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "Y"
+      },
+      "_selectable": true
+    },
+    "expiryyear": {
+      "type": "Number",
+      "required": false,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "expiryYear",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
         "nullable": "Y"
       },
       "_selectable": true

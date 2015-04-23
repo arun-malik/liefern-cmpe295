@@ -193,7 +193,6 @@
   },
   "validations": [],
   "relations": {
-
     "requests": {
       "type": "hasMany",
       "model": "Order",
@@ -219,7 +218,6 @@
       "model": "Address",
       "foreignKey": "userid"
     }
-
   },
   "acls": [],
   "methods": []
