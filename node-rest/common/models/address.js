@@ -16,13 +16,26 @@ module.exports = function(Address) {
         if(json === null){
             callback(new Error("Invalid address"),null);
         }else{
-            Address.create(json,function(err,res) {
+            Address.upsert(json,function(err,res) {
                 if(err){
                     callback(new Error(err),null);
                 }
                 callback(null,res);
             });
         }
+    }
+
+    module.exports.profileAddress =  function (userid,callback) {
+
+        Address.findOne({  where: {and : [{userid : userid}, {home : 1}] }}, function(err,res){
+
+            if(err){
+                callback(new Error(err));
+            }
+
+                callback(null,res);
+
+        });
     }
 
 };

@@ -2,6 +2,7 @@ var Crypto = require('../utils/authorization');
 var uuid = require('node-uuid');
 var hash = require("hashids");
 var Payments = require('./payments');
+var Address = require('./address');
 
 
 module.exports = function(Liefernuser) {
@@ -36,6 +37,28 @@ module.exports = function(Liefernuser) {
             description : 'clear session token and set 0 in active'
         }
     );
+
+    Liefernuser.remoteMethod(
+        'saveProfile',
+        {
+            accepts: { arg: 'data', type: 'object', http: { source: 'body' } } ,
+            returns : {arg: 'response', type: 'object'},
+            http: {path: '/profile', verb:'POST'},
+            description : 'Save User Profile'
+        }
+    );
+
+
+    Liefernuser.remoteMethod(
+        'getProfile',
+        {
+            accepts: {arg: 'userid', type: 'integer', required:true},
+            returns : {arg: 'response', type: 'object'},
+            http: {path: '/profile', verb:'GET'},
+            description : 'Get User Profile'
+        }
+    );
+
 
     // add session key and hash password to DB
   Liefernuser.beforeRemote('create', function(ctx, unused, next) {
@@ -265,6 +288,58 @@ validateUserAndPassword =  function (json,callback) {
         });
     };
 
+
+
+    Liefernuser.saveProfile = function(data,callback) {
+
+        if(null !=  data.address){
+
+            Address.saveAddress(data.address,function(err,res) {
+                if(err){
+                    callback(new Error(err));
+                }
+                console.log(res);
+            });
+        }
+
+        Liefernuser.upsert(data,function(err,res) {
+
+            if(err){
+                callback(new Error(err));
+            }
+
+            console.log(res);
+            callback(null,data);
+
+        });
+    }
+
+
+    Liefernuser.getProfile = function(userid,callback) {
+
+        Liefernuser.findOne({  where:
+        {   userid : userid
+
+        }
+        },function(err,res) {
+
+            var user = res;
+
+            if(err){
+                callback(new Error(err));
+            }
+
+            Address.profileAddress(userid,function(err,res) {
+                if(err){
+                    callback(new Error(err));
+                }
+                
+                user.address = res;
+                callback(null,user);
+            });
+
+        });
+    }
 
 
 };
