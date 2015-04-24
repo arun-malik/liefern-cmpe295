@@ -33,8 +33,8 @@
             <EditText
                 android:id="@+id/packageWeightText"
                 style="@style/InputEditText"
-                android:inputType="numberDecimal"
-                android:hint="Weight" />
+                android:hint="Weight"
+                android:inputType="numberDecimal" />
 
             <Button
                 android:id="@+id/addPackage"

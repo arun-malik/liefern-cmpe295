@@ -1,3 +1,71 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ParentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fadeScrollbars="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:gravity="center"
+            android:text="Add Card" />
+
+        <com.liefern.widgets.OpaqueLinearLayout style="@style/CardViewStyle" >
+
+            <EditText
+                android:id="@+id/cardNumberText"
+                style="@style/InputEditText"
+                android:hint="Card Number"/>
+
+            
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+                
+                <EditText
+                android:id="@+id/expireMonthText"
+                style="@style/InputEditText"
+                android:layout_width="wrap_content"
+                android:hint="Expire Month"
+                android:inputType="numberDecimal" />
+
+                <EditText
+                    android:id="@+id/expireYearText"
+                    style="@style/InputEditText"
+                    android:layout_width="match_parent"
+                    android:hint="Expire Year"
+                    android:inputType="numberDecimal"/>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/securityCodeText"
+                style="@style/InputEditText"
+                android:hint="CVV"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/nameOnCardText"
+                style="@style/InputEditText"
+                android:hint="Name on card"
+                android:inputType="numberDecimal" />
+
+            <Button
+                android:id="@+id/dialogAddPaymentButton"
+                style="@style/BlackButton"
+                android:text="Add" />
+        </com.liefern.widgets.OpaqueLinearLayout>
+    </LinearLayout>
+
+</ScrollView>
+<!--
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -126,3 +194,4 @@
     </ScrollView>
 
 </RelativeLayout>
+-->

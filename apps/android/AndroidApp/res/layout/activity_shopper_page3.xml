@@ -18,29 +18,29 @@
             <EditText
                 android:id="@+id/totalMilesText"
                 style="@style/InputEditText"
-                android:inputType="numberDecimal"
-                android:hint="Total miles" />
+                android:hint="Total miles"
+                android:inputType="numberDecimal" />
 
             <EditText
                 android:id="@+id/totalWeightText"
                 style="@style/InputEditText"
-                android:inputType="numberDecimal"
-                android:hint="Total weight" />
+                android:hint="Total weight"
+                android:inputType="numberDecimal" />
 
             <EditText
                 android:id="@+id/recommendedCostText"
                 style="@style/InputEditText"
-                android:inputType="numberDecimal"
                 android:enabled="false"
-                android:singleLine="false"
+                android:hint="Recommended delivery cost $10"
+                android:inputType="numberDecimal"
                 android:maxLines="2"
-                android:text="Recommended delivery cost $10" />
+                android:singleLine="false" />
             
             <EditText
                 android:id="@+id/shopperQuoteCostText"
                 style="@style/InputEditText"
-                android:inputType="numberDecimal"
-                android:hint="Delivery cost you want to pay" />
+                android:hint="Delivery cost you want to pay"
+                android:inputType="numberDecimal" />
 
             <Button
                 android:id="@+id/placeOrderButton"
