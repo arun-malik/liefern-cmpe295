@@ -155,6 +155,8 @@ module.exports = function(Liefernuser) {
 
         validateUserAndPassword(json, function(err, res){
 
+            var user = res;
+
             if(err)
             {
                 cb(err,null);
@@ -163,7 +165,16 @@ module.exports = function(Liefernuser) {
             if(res === null){
                 cb(new Error("Error login."))
             }else{
-                cb(null,res);
+                Address.profileAddress(user.userid,function(err,res) {
+                    if(err){
+                        callback(new Error(err));
+                    }
+
+                    user.address = res;
+                    cb(null,user);
+                });
+
+                //cb(null,res);
             }
 
         });
@@ -333,7 +344,7 @@ validateUserAndPassword =  function (json,callback) {
                 if(err){
                     callback(new Error(err));
                 }
-                
+
                 user.address = res;
                 callback(null,user);
             });
