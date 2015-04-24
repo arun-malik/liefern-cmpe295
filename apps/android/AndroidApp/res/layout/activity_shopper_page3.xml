@@ -18,6 +18,7 @@
             <EditText
                 android:id="@+id/totalMilesText"
                 style="@style/InputEditText"
+                android:inputType="numberDecimal"
                 android:hint="Total miles" />
 
             <EditText
@@ -30,7 +31,10 @@
                 android:id="@+id/recommendedCostText"
                 style="@style/InputEditText"
                 android:inputType="numberDecimal"
-                android:hint="Recommended delivery cost" />
+                android:enabled="false"
+                android:singleLine="false"
+                android:maxLines="2"
+                android:text="Recommended delivery cost $10" />
             
             <EditText
                 android:id="@+id/shopperQuoteCostText"

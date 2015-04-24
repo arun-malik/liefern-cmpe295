@@ -73,6 +73,8 @@ public class LoginActivity extends LiefernBaseActivity {
 				user.setPassword(password);
 				if(rememberMeCheckBox.isChecked()) {
 					SharedPreferenceStore.getInstance().storeAccountDetails(user);
+				} else {
+					SharedPreferenceStore.getInstance().clearStoredAccountDetails();
 				}
 				execute();
 			}
