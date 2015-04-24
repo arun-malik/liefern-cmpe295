@@ -7,6 +7,7 @@ import com.liefern.webservices.models.WebServiceModel;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,34 +30,28 @@ public class ShopperPage2Activity extends LiefernBaseActivity {
 		lstRequests = (ListView) findViewById(R.id.packageList);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.shopper_page2, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
 	public void nextShopperPage3(View view) {
 		Intent intent = new Intent(this, ShopperPage3Activity.class);
 		startActivity(intent);
 	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(LiefernRepository.getInstance().getBuiltOrder().getPackages() != null && LiefernRepository.getInstance().getBuiltOrder().getPackages().size() > 0) {
+			adaptor = new PackageListAdapter(ShopperPage2Activity.this, R.layout.request_list_item, LiefernRepository.getInstance().getBuiltOrder().getPackages());
+			lstRequests.setAdapter(adaptor);
+			findViewById(R.id.packageListLayout).setVisibility(View.VISIBLE);
+		} else {
+			findViewById(R.id.packageListLayout).setVisibility(View.GONE);
+		}
+	}
 
 	public void addPackagesButton(View view) {
-		// TODO Auto-generated method stub
+		Intent intent = new Intent(this, AddPackageActivity.class);
+		startActivity(intent);
 		// custom dialog
-		final Dialog dialog = new Dialog(ShopperPage2Activity.this);
+		/*final Dialog dialog = new Dialog(ShopperPage2Activity.this);
 		dialog.setContentView(R.layout.activity_shopper_add_package_dialog);
 		dialog.setTitle("Add Package");
 
@@ -85,7 +80,7 @@ public class ShopperPage2Activity extends LiefernBaseActivity {
 				dialog.dismiss();
 			}
 		});
-		dialog.show();
+		dialog.show();*/
 
 	}
 

@@ -1,4 +1,54 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ParentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fadeScrollbars="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            style="@style/FormHeading"
+            android:text="Delivery Charges" />
+
+        <com.liefern.widgets.OpaqueLinearLayout style="@style/CardViewStyle" >
+
+            <EditText
+                android:id="@+id/totalMilesText"
+                style="@style/InputEditText"
+                android:hint="Total miles" />
+
+            <EditText
+                android:id="@+id/totalWeightText"
+                style="@style/InputEditText"
+                android:inputType="numberDecimal"
+                android:hint="Total weight" />
+
+            <EditText
+                android:id="@+id/recommendedCostText"
+                style="@style/InputEditText"
+                android:inputType="numberDecimal"
+                android:hint="Recommended delivery cost" />
+            
+            <EditText
+                android:id="@+id/shopperQuoteCostText"
+                style="@style/InputEditText"
+                android:inputType="numberDecimal"
+                android:hint="Delivery cost you want to pay" />
+
+            <Button
+                android:id="@+id/placeOrderButton"
+                style="@style/BlackButton"
+                android:onClick="placeOrder"
+                android:text="Place Order" />
+        </com.liefern.widgets.OpaqueLinearLayout>
+    </LinearLayout>
+
+</ScrollView>
+
+<!-- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -108,3 +158,4 @@
         android:inputType="numberDecimal" />
 
 </RelativeLayout>
+ -->

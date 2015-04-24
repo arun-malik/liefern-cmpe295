@@ -1,3 +1,50 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ParentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fadeScrollbars="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            style="@style/FormHeading"
+            android:text="Add Package" />
+
+        <com.liefern.widgets.OpaqueLinearLayout style="@style/CardViewStyle" >
+
+            <EditText
+                android:id="@+id/packageDescText"
+                style="@style/InputEditText"
+                android:hint="Description" />
+
+            <EditText
+                android:id="@+id/packageContentText"
+                style="@style/InputEditText"
+                android:hint="Content" />
+
+            <EditText
+                android:id="@+id/packageSizeText"
+                style="@style/InputEditText"
+                android:inputType="numberDecimal"
+                android:hint="Size" />
+
+            <EditText
+                android:id="@+id/packageWeightText"
+                style="@style/InputEditText"
+                android:inputType="numberDecimal"
+                android:hint="Weight" />
+
+            <Button
+                android:id="@+id/addPackage"
+                style="@style/BlackButton"
+                android:text="Add" />
+        </com.liefern.widgets.OpaqueLinearLayout>
+    </LinearLayout>
+
+</ScrollView><!--
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -92,4 +139,4 @@
         android:text="Description"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-</RelativeLayout>
+</RelativeLayout>-->

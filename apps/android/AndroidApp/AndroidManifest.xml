@@ -37,6 +37,9 @@
         <activity
             android:name=".views.SignUpActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
+         <activity
+            android:name=".views.AddPackageActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".views.RequestActivity"
             android:label="@string/title_activity_request"

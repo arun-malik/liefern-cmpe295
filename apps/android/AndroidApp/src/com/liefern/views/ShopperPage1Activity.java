@@ -45,7 +45,16 @@ public class ShopperPage1Activity extends LiefernBaseActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void nextShopperPage2Button(View view) {
+	@Override
+	public void onClick(View v) {
+		switch(v.getId()) {
+		case R.id.nextShopperPage2:
+			nextShopperPage2Button();
+			break;
+		}
+	}
+	
+	private void nextShopperPage2Button() {
 		Address toAddress = new Address();
 		EditText text = (EditText) findViewById(R.id.toAddress1Text);
 		toAddress.setAddress1( text.getText().toString() );
