@@ -1,7 +1,5 @@
 package com.liefern.constants;
 
-import java.util.Date;
-
 public interface Constants {
 
 	String STATUS = "status";
@@ -57,7 +55,6 @@ public interface Constants {
 	String EXPIRY_MONTH = "expirymonth";
 	String EXPIRY_YEAR = "expiryyear";
 	String NAME_ON_CARD = "nameoncard";
-	
-			
+	String ADDRESS = "address";
 	
 }

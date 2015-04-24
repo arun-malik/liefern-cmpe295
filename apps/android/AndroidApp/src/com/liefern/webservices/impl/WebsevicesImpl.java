@@ -6,15 +6,6 @@ import java.net.URLEncoder;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-
-
-
-
-
-
-
-
-
 import org.json.JSONObject;
 
 import android.net.Uri;
@@ -43,6 +34,14 @@ public final class WebsevicesImpl {
 		httpPost.setEntity(new StringEntity(user.toJSON().toString()));
 		loginResult.parseJSON(WebServiceHelper.executeRequest(httpPost,0));
 //		LiefernRepository.getInstance().setLoggedInUser(!loginResult.isError() ? user : null);
+		return loginResult;
+	}
+	
+	public LoginResult updateProfile(User user) throws Exception {
+		LoginResult loginResult = new LoginResult();
+		HttpPost httpPost = new HttpPost(WebserviceURLs.UPDATE_PROFILE_URL+ LiefernRepository.getInstance().getLoggedInUser().getUserId());
+		httpPost.setEntity(new StringEntity(user.toJSONWithAddress().toString() ));
+		loginResult.parseJSON(WebServiceHelper.executeRequest(httpPost,0));
 		return loginResult;
 	}
 	

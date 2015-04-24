@@ -28,7 +28,6 @@
             <EditText
                 android:id="@+id/packageSizeText"
                 style="@style/InputEditText"
-                android:inputType="numberDecimal"
                 android:hint="Size" />
 
             <EditText

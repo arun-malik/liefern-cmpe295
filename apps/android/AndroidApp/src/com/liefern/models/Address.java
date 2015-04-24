@@ -16,7 +16,7 @@ public class Address {
 	  private String state;
 	  private String country;
 	  private int zip;
-	  private User user;
+	  private int user;
 	  private Boolean home;
 	  private Date createdDate; 
 	  private Date modifiedDate;
@@ -108,13 +108,13 @@ public class Address {
 	/**
 	 * @return the user
 	 */
-	public User getUser() {
+	public int getUser() {
 		return user;
 	}
 	/**
 	 * @param user the user to set
 	 */
-	public void setUser(User user) {
+	public void setUser(int user) {
 		this.user = user;
 	}
 	/**

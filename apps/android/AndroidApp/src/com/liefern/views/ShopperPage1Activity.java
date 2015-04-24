@@ -77,6 +77,7 @@ public class ShopperPage1Activity extends LiefernBaseActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		toAddress.setUser(LiefernRepository.getInstance().getLoggedInUser().getUserId());
 		
 		Address fromAddress = new Address();
 		text = (EditText) findViewById(R.id.fromAddress1Text);
@@ -100,6 +101,8 @@ public class ShopperPage1Activity extends LiefernBaseActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		fromAddress.setUser(LiefernRepository.getInstance().getLoggedInUser().getUserId());
 
 		LiefernRepository.getInstance().getBuiltOrder().setTolocation(toAddress);
 		LiefernRepository.getInstance().getBuiltOrder().setFromlocation(fromAddress);

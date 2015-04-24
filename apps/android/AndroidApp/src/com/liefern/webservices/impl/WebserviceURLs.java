@@ -1,5 +1,7 @@
 package com.liefern.webservices.impl;
 
+import java.net.URI;
+
 public interface WebserviceURLs {
 	String BASE_URL = "http://liefern.cloudapp.net:3000/api/";
 	//String BASE_URL = "http://10.0.0.14:3000/api/";
@@ -24,4 +26,6 @@ public interface WebserviceURLs {
 	String POST_ORDER_URL = BASE_URL + "Orders/saveAll/";
 	
 	String POST_PAYMENT_CARD_URL = BASE_URL + "payments";
+	
+	String UPDATE_PROFILE_URL = BASE_URL + "Liefernusers/profile?userid=";
 }

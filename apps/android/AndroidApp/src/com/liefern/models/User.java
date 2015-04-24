@@ -16,10 +16,11 @@ public class User {
 //	private String creditCard;
 	private String password;
 	private Boolean active;
-	private float avgRating;
+	private float avgRating = 0.0f;
 	private String sessiontoken;
 	private Date createdDate;
 	private Date modifiedDate;
+	private Address address = new Address();
 	
 	public String getName() {
 		return name;
@@ -119,6 +120,19 @@ public class User {
 	 */
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	public Object toJSONWithAddress() throws JSONException {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject = this.toJSON();
+		jsonObject.put(Constants.NAME, this.name);
+		jsonObject.put(Constants.ADDRESS, this.address.toJSON());
+		return jsonObject;
 	}
 	
 }
