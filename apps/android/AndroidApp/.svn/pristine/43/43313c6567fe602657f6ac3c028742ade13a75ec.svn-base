@@ -1,8 +1,0 @@
-package com.liefern.webservices.impl;
-
-public interface WebserviceURLs {
-	String BASE_URL = "http://liefern.cloudapp.net:3000/api/Liefernusers/";
-	String LOGIN_URL		= BASE_URL + "login";
-	String SIGN_UP_URL		= BASE_URL;
-	String LOG_OUT_URL		= BASE_URL + "logout";
-}

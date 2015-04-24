@@ -1,12 +1,15 @@
 package com.liefern.views;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.liefern.R;
 import com.liefern.models.User;
+import com.liefern.utility.SharedPreferenceStore;
 import com.liefern.utility.Utility;
 import com.liefern.webservices.impl.WebsevicesImpl;
 import com.liefern.webservices.models.WebServiceModel;
@@ -16,6 +19,7 @@ public class LoginActivity extends LiefernBaseActivity {
 	private EditText passwordEditText;
 	private User user;
 	private static LoginActivity instance;
+	private CheckBox rememberMeCheckBox;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,14 @@ public class LoginActivity extends LiefernBaseActivity {
 		instance = this;
 		emailIdEditText = (EditText) findViewById(R.id.email_id);
 		passwordEditText = (EditText) findViewById(R.id.password);
+		rememberMeCheckBox = (CheckBox) findViewById(R.id.remember_me);
+		user = SharedPreferenceStore.getInstance().getStoredAccountDetails();
+		if(user.getEmailId().length() > 0) {
+			emailIdEditText.setText(user.getEmailId());
+			passwordEditText.setText(user.getPassword());
+			rememberMeCheckBox.setChecked(true);
+			execute();
+		}
 	}
 
 	@Override
@@ -59,6 +71,9 @@ public class LoginActivity extends LiefernBaseActivity {
 				String password = passwordEditText.getText().toString().trim();
 				user.setEmailId(email);
 				user.setPassword(password);
+				if(rememberMeCheckBox.isChecked()) {
+					SharedPreferenceStore.getInstance().storeAccountDetails(user);
+				}
 				execute();
 			}
 			break;

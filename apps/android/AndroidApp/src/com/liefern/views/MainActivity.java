@@ -31,14 +31,19 @@ public class MainActivity extends LiefernBaseActivity {
 		
 	}
 	
-	public void loadTravelerActivity(View view) {
-		Intent travelerIntent = new Intent(this, TravelerActivity.class);
-	    startActivity(travelerIntent);
-	}
-	
-	public void loadShopperActivity(View view) {
-		Intent intent = new Intent(this, ShopperPage1Activity.class);
-	    startActivity(intent);
+	@Override
+	public void onClick(View v) {
+		switch(v.getId()) {
+		case R.id.travelerButton:
+			Intent travelerIntent = new Intent(this, TravelerActivity.class);
+		    startActivity(travelerIntent);
+			break;
+			
+		case R.id.shopperButton:
+			Intent intent = new Intent(this, ShopperPage1Activity.class);
+		    startActivity(intent);
+			break;
+		}
 	}
 	
 }

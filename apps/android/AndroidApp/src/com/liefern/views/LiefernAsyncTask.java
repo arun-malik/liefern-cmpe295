@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.liefern.R;
 import com.liefern.webservices.models.WebServiceModel;
+import com.liefern.widgets.CustomDialog;
 
 /**
  * Base AsyncTask which executes all web request in the background
@@ -163,7 +164,7 @@ public class LiefernAsyncTask extends AsyncTask<Object, Object, Object>  {
 	
 	private void showProgressDialog() {
 		if(progressDialog == null) {
-			progressDialog = new ProgressDialog(parentActivity);
+			progressDialog = new CustomDialog(parentActivity);
 			progressDialog.setTitle(R.string.please_wait);
 			progressDialog.setMessage(parentActivity.getString(R.string.loading));
 			progressDialog.setCancelable(false);

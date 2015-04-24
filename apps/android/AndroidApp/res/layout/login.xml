@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:background="@android:color/white"
-    android:orientation="vertical"
-    android:padding="10dp" >
+<com.liefern.widgets.OpaqueLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/CardViewStyle" >
 
     <TextView
         style="@style/FormHeading"
         android:text="@string/login" />
 
     <EditText
-        style="@style/InputEditText"
         android:id="@+id/email_id"
-        android:inputType="textEmailAddress"
-        android:text="arunmalik@gmail.com"
-        android:hint="@string/email_id" />
+        style="@style/InputEditText"
+        android:hint="@string/email_id"
+        android:inputType="textEmailAddress" />
 
     <EditText
-        style="@style/InputEditText"
         android:id="@+id/password"
+        style="@style/InputEditText"
         android:hint="@string/password"
-        android:text="ABCD"
         android:inputType="textPassword" />
+    
+    
+    <CheckBox
+        android:id="@+id/remember_me"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Remember Me" />
 
     <Button
         android:id="@+id/login"
-        style="@style/BlueButton"
+        style="@style/BlackButton"
+        android:layout_gravity="center"
         android:text="@string/login" />
 
     <TextView
@@ -40,8 +44,8 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:text="@string/sign_up_underlined"
-        android:textColor="@android:color/holo_blue_dark"
+        android:textColor="@android:color/white"
         android:textSize="20sp"
         android:textStyle="bold" />
 
-</LinearLayout>
+</com.liefern.widgets.OpaqueLinearLayout>
