@@ -34,5 +34,6 @@
     <string name="title_activity_shopper_page3">ShopperPage3Activity</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_payments">PaymentsActivity</string>
+    <string name="UrlMain">http://liefern.cloudapp.net:3000/api/</string>
 
 </resources>

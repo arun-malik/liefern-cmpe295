@@ -1,18 +1,32 @@
 package com.liefern.views;
 
 import com.liefern.R;
+import com.liefern.models.LiefernRepository;
+import com.liefern.webservices.impl.WebsevicesImpl;
 import com.liefern.webservices.models.WebServiceModel;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ListView;
 
-public class TravelerActivity extends LiefernBaseActivity {
+public class TravelerActivity extends LiefernBaseActivity implements OnItemClickListener {
 
+	private ListView orderList;
+	private static int REQUEST_TYPE  =1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_traveler);
+		 orderList = (ListView) findViewById(R.id.orderList);
+
+		orderList.setOnItemClickListener(this);
+		 execute();
 	}
 
 	@Override
@@ -36,14 +50,15 @@ public class TravelerActivity extends LiefernBaseActivity {
 
 	@Override
 	public WebServiceModel processService() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		WebsevicesImpl wsImpl = new WebsevicesImpl();
+		return wsImpl.getTravelerDeliveryOrders(); 
+
 	}
 
 	@Override
 	public void notifyWebResponse(WebServiceModel model) {
-		// TODO Auto-generated method stub
-		
+		 RequestListAdapter adaptor = new RequestListAdapter(this, R.layout.request_list_item, LiefernRepository.getInstance().getRequestOrderList(),REQUEST_TYPE);
+	     orderList.setAdapter(adaptor);
 	}
 
 	@Override
@@ -51,4 +66,16 @@ public class TravelerActivity extends LiefernBaseActivity {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+	{
+		Intent iOrderSelected =  new Intent(this, ViewRequest.class);
+		iOrderSelected.putExtra("selected_item", position);
+		startActivity(iOrderSelected);
+		finish();
+		
+	}
+
+
 }

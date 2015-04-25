@@ -108,4 +108,12 @@ public final class WebsevicesImpl {
 		requestOrderResult.parseJSON(WebServiceHelper.executeRequest(httpGet,1));
 		return requestOrderResult;
 	}
+	
+
+	public RequestOrderResult getTravelerDeliveryOrders() throws Exception {
+		RequestOrderResult requestOrderResult = new RequestOrderResult();
+		HttpGet httpGet = new HttpGet(  WebserviceURLs.TRAVELER_ORDER_RESULT  + LiefernRepository.getInstance().getLoggedInUser().getUserId());
+		requestOrderResult.parseJSON(WebServiceHelper.executeRequest(httpGet,1));
+		return requestOrderResult;
+	}
 }

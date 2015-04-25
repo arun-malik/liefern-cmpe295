@@ -28,4 +28,8 @@ public interface WebserviceURLs {
 	String POST_PAYMENT_CARD_URL = BASE_URL + "payments";
 	
 	String UPDATE_PROFILE_URL = BASE_URL + "Liefernusers/profile?userid=";
+	
+	String TRAVELER_ORDER_RESULT = BASE_URL +  "Orders/?filter[include]=fromlocation&filter[include]=tolocation&filter[include]=packages"
+			+ "&filter[include]=customer&filter[include]=traveler"
+			+ "&filter[where][orderStatus]=0&filter[where][customerid][neq]=";
 }
