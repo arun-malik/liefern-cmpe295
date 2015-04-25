@@ -26,6 +26,14 @@ public class TravelerActivity extends LiefernBaseActivity implements OnItemClick
 		 orderList = (ListView) findViewById(R.id.orderList);
 
 		orderList.setOnItemClickListener(this);
+		orderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+	            @Override
+	            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+	                // currentActivity 3 -> request
+	                startActivity(new Intent(getApplicationContext(), ViewRequest.class).putExtra("position", position).putExtra("currentActivity", 4));
+	            }
+	        });
+		 
 		 execute();
 	}
 

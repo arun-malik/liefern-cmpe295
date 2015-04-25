@@ -129,7 +129,7 @@
                 android:textStyle="bold" />
 
             <ListView
-                android:id="@+id/listView1"
+                android:id="@+id/itemList"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"/>
 
@@ -214,12 +214,21 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/acknowledge"
+                android:id="@+id/acknowledgeButton"
                 android:layout_width="fill_parent"
-                android:layout_marginLeft="20dip"
-                android:layout_marginRight="20dip"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_height="wrap_content"
-                android:text="Acknowledge" />
+                 />
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="wrap_content"
+                />
+
 
 
         </LinearLayout>

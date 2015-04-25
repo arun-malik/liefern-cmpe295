@@ -1,10 +1,11 @@
 package com.liefern.views;
 
-import java.util.ArrayList;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
@@ -14,6 +15,8 @@ import com.liefern.models.Order;
 import com.liefern.webservices.impl.WebsevicesImpl;
 import com.liefern.webservices.models.WebServiceModel;
 
+import java.util.ArrayList;
+
 public class RequestActivity extends LiefernBaseActivity {
 
 	private static RequestActivity instance;
@@ -22,6 +25,7 @@ public class RequestActivity extends LiefernBaseActivity {
 	ArrayList<Order> orderArray;
     BaseAdapter adaptor;
 	private ListView lstRequests;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,15 @@ public class RequestActivity extends LiefernBaseActivity {
 		setContentView(R.layout.request);
 		instance = this;
 		lstRequests = (ListView) findViewById(R.id.lstRequests);
+
+        lstRequests.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                // currentActivity 3 -> request
+                startActivity(new Intent(getApplicationContext(), ViewRequest.class).putExtra("position", position).putExtra("currentActivity", 3));
+            }
+        });
+
 		execute();
 	}
 
@@ -70,4 +83,6 @@ public class RequestActivity extends LiefernBaseActivity {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 }

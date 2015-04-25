@@ -1,22 +1,21 @@
 package com.liefern.views;
 
-import java.util.ArrayList;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 
 import com.liefern.R;
-import com.liefern.R.id;
-import com.liefern.R.layout;
-import com.liefern.R.menu;
 import com.liefern.models.LiefernRepository;
 import com.liefern.models.Order;
 import com.liefern.webservices.impl.WebsevicesImpl;
 import com.liefern.webservices.models.WebServiceModel;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
+import java.util.ArrayList;
 
 public class ReceiptActivity extends LiefernBaseActivity {
 
@@ -33,6 +32,15 @@ public class ReceiptActivity extends LiefernBaseActivity {
 		setContentView(R.layout.receipt);
 		instance = this;
 		lstReceipts = (ListView) findViewById(R.id.lstReceipts);
+
+        lstReceipts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                // currentActivity 2 -> receipt
+                startActivity(new Intent(getApplicationContext(), ViewRequest.class).putExtra("position", position).putExtra("currentActivity", 2));
+            }
+        });
+
 		execute();
 	}
 

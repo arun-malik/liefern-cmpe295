@@ -1,15 +1,18 @@
 package com.liefern.webservices.impl;
 
-import java.net.URI;
-import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
-import org.json.JSONObject;
-
-import android.net.Uri;
-import android.util.Log;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 import com.liefern.models.LiefernRepository;
 import com.liefern.models.Order;
@@ -22,7 +25,6 @@ import com.liefern.webservices.models.PostOrderResult;
 import com.liefern.webservices.models.PostPaymentCardResult;
 import com.liefern.webservices.models.RequestOrderResult;
 import com.liefern.webservices.models.SignUpResult;
-import com.liefern.webservices.models.WebServiceModel;
 
 @SuppressWarnings("deprecation")
 public final class WebsevicesImpl {
@@ -116,4 +118,30 @@ public final class WebsevicesImpl {
 		requestOrderResult.parseJSON(WebServiceHelper.executeRequest(httpGet,1));
 		return requestOrderResult;
 	}
+	
+	public RequestOrderResult acknowledgeOrder(int orderId) throws Exception {
+        RequestOrderResult requestOrderResult = new RequestOrderResult();
+        HttpClient client = new DefaultHttpClient();
+        HttpPut httpPut = new HttpPut( WebserviceURLs.ACKNOWLEDGE_ORDER_RESULT + orderId);
+
+        List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+        pairs.add(new BasicNameValuePair("orderStatus", "1"));
+        httpPut.setEntity(new UrlEncodedFormEntity(pairs));
+
+        HttpResponse response = client.execute(httpPut);
+        return requestOrderResult;
+    }
+
+    public RequestOrderResult cancelOrder(int orderId) throws Exception {
+        RequestOrderResult requestOrderResult = new RequestOrderResult();
+        HttpClient client = new DefaultHttpClient();
+        HttpPut httpPut = new HttpPut( WebserviceURLs.CANCEL_ORDER_RESULT + orderId);
+
+        List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+        pairs.add(new BasicNameValuePair("orderStatus", "4"));
+        httpPut.setEntity(new UrlEncodedFormEntity(pairs));
+
+        HttpResponse response = client.execute(httpPut);
+        return requestOrderResult;
+    }
 }
