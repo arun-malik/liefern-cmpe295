@@ -35,5 +35,6 @@
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_payments">PaymentsActivity</string>
     <string name="UrlMain">http://liefern.cloudapp.net:3000/api/</string>
+    <color name="green">#328332</color>
 
 </resources>
