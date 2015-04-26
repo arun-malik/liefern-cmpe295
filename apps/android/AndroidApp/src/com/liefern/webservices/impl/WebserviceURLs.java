@@ -9,17 +9,20 @@ public interface WebserviceURLs {
 	String LOGIN_URL		= BASE_URL + "Liefernusers/login";
 	String SIGN_UP_URL		= BASE_URL + "Liefernusers";
 	String LOG_OUT_URL		= BASE_URL + "Liefernusers/logout";
-//	String REQUEST_ORDER_RESULT = BASE_URL + "Orders?filter={\"where\":{\"customerid\":";
 	String REQUEST_ORDER_RESULT = BASE_URL + "Orders/?filter[include]=fromlocation&filter[include]=tolocation"
 			+ "&filter[include]=packages&filter[include]=customer&filter[include]=traveler"
 			+ "&filter[where][orderStatus][inq]=0&filter[where][orderStatus][inq]=1"
 			+ "&filter[where][customerid]=";
-	String DELIVERY_ORDER_RESULT = BASE_URL + "Orders/?filter[include]=fromlocation&filter[include]=tolocation&"
-			+ "filter[include]=packages&filter[include]=customer&filter[include]=traveler&filter[where][travlerid]=";
+	
+	String DELIVERY_ORDER_RESULT = BASE_URL + "Orders/?filter[include]=fromlocation&filter[include]=tolocation"
+			+ "&filter[where][orderStatus][inq]=1"
+			+ "&filter[include]=packages&filter[include]=customer&filter[include]=traveler&filter[where][travlerid]=";
+	
+	
 	String RECEIPT_ORDER_RESULT = BASE_URL + "Orders/?filter[include]=fromlocation&filter[include]=tolocation&"
 			+ "filter[include]=packages&filter[include]=customer&filter[include]=traveler"
 			+ "&filter[where][orderStatus][inq]=2&filter[where][orderStatus][inq]=3&filter[where][orderStatus][inq]=4&filter[where][orderStatus][inq]=5"
-			+ "&filter[where][customerid]=";
+			+ "&filter[where][or][0][customerid]=%s&filter[where][or][1][travlerid]=%s";
 	
 	String REQUEST_PAYMENT_CARD_RESULT = BASE_URL + "payments/?filter[where][userid]=";
 	
@@ -33,7 +36,6 @@ public interface WebserviceURLs {
 			+ "&filter[include]=customer&filter[include]=traveler"
 			+ "&filter[where][orderStatus]=0&filter[where][customerid][neq]=";
 	
-	String ACKNOWLEDGE_ORDER_RESULT = BASE_URL + "Orders/";
+	String UPDATE_ORDER_STATUS = BASE_URL + "Orders/";
 
-    String CANCEL_ORDER_RESULT = BASE_URL + "Orders/";
 }

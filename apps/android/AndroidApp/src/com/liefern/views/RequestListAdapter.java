@@ -67,7 +67,7 @@ public class RequestListAdapter extends BaseAdapter {
 				TextView deliveryTitle = (TextView) convertView
 						.findViewById(R.id.delivery_title);
 
-				deliveryTitle.setText("Order Identifier : " + Integer.toString(list.get(position).getOrderId()));
+				deliveryTitle.setText("Order Number : " + Integer.toString(list.get(position).getOrderId()));
 
 				TextView fromToLocation = (TextView) convertView
 						.findViewById(R.id.from_to_location);

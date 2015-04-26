@@ -1,7 +1,13 @@
 package com.liefern.views;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.liefern.R;
 import com.liefern.models.Address;
@@ -19,212 +26,264 @@ import com.liefern.models.Packages;
 import com.liefern.webservices.impl.WebsevicesImpl;
 import com.liefern.webservices.models.WebServiceModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ViewRequest extends LiefernBaseActivity {
 
+	private ArrayAdapter<String> itemAdapter;
+	private static final int ACKNOWLEDGE = 1;
+	private static final int CANCEL = 4;
+	private static final int DELIVERED = 5;
+	BaseAdapter adapter;
 
+	private int btnRecognizer;
+	private Order currentOrder = null;
+	private int orderId;
 
-    private ArrayAdapter<String> itemAdapter;
-    private static final String ACKNOWLEDGE = "Acknowledge";
-    private static final String CANCEL = "Cancel";
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-    private static final int REQUEST_TYPE = 1;
+		setContentView(R.layout.activity_view_request);
 
-    BaseAdapter adapter;
-    private ListView lstRequests;
+		Button deliveredBtn = (Button) findViewById(R.id.deliveredButton);
+		Button ackBtn = (Button) findViewById(R.id.acknowledgeButton);
+		Button cancelBtn = (Button) findViewById(R.id.cancelButton);
 
-    private int buttonPress;
+		int position = 0;
+		position = getIntent().getExtras().getInt("position");
 
+		btnRecognizer = getIntent().getExtras().getInt("currentActivity");
 
+		enableButton(deliveredBtn, ackBtn, cancelBtn);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+		List<Order> orderList = LiefernRepository.getInstance()
+				.getRequestOrderList();
 
+		currentOrder = orderList.get(position);
+		
 
+		if (currentOrder != null) {
+			
+			orderId = currentOrder.getOrderId();
 
-        setContentView(R.layout.activity_view_request);
+			ListView itemList = (ListView) findViewById(R.id.itemList);
 
-        Button ackBtn = (Button) findViewById(R.id.acknowledgeButton);
-        Button cancelBtn = (Button) findViewById(R.id.cancelButton);
+			final int orderId = currentOrder.getOrderId();
+			TextView orderText = (TextView) findViewById(R.id.orderId);
+			orderText.setText(String.valueOf(currentOrder.getOrderId()));
 
-        int position = 0;
-        position = getIntent().getExtras().getInt("position");
+			TextView fromAddrText = (TextView) findViewById(R.id.fromAddress);
+			Address fromAddr = currentOrder.getFromlocation();
+			fromAddrText.setText(fromAddr.getAddress1() + " "
+					+ fromAddr.getCity() + " " + fromAddr.getCountry());
 
-        int btnRecognizer = getIntent().getExtras().getInt("currentActivity");
+			TextView toAddrText = (TextView) findViewById(R.id.toAddress);
+			Address toAddr = currentOrder.getTolocation();
+			toAddrText.setText(toAddr.getAddress1() + " " + toAddr.getCity()
+					+ " " + toAddr.getCountry());
 
-        Log.d("Arun Malik ", "Position :"+ position);
-        Log.d("Arun Malik ", "btnRecognizer :"+ btnRecognizer);
-        
-        enableButton(btnRecognizer, ackBtn, cancelBtn);
+			// To populate the ListView with the packages(items) in that order
+			List<Packages> packageList = currentOrder.getPackages();
+			if (null != packageList && packageList.size() > 0) {
+				ArrayList<String> itemArrayList = new ArrayList<String>();
+				int totalWeight = 0;
+				for (Packages singlePackage : packageList) {
+					StringBuilder sb = new StringBuilder();
+					sb.append(singlePackage.getDescription()).append("--")
+							.append(singlePackage.getContent()).append("--")
+							.append(singlePackage.getSize());
+					itemArrayList.add(sb.toString());
+					totalWeight += singlePackage.getWeight();
+				}
 
-        List<Order> orderList = LiefernRepository.getInstance().getRequestOrderList();
+				itemAdapter = new ArrayAdapter<String>(this,
+						android.R.layout.simple_list_item_1, itemArrayList);
+				itemList.setAdapter(itemAdapter);
+				
+				TextView totalWeightText = (TextView) findViewById(R.id.totalWeight);
+				totalWeightText.setText(String.valueOf(totalWeight));
+			}
 
-        Order currentOrder = null;
-        if(position != 0) {
-            currentOrder = orderList.get(position);
-            Log.d("Arun Malik ", "Current OrderId :"+ currentOrder.getOrderId());
-        }
+			TextView estCostText = (TextView) findViewById(R.id.estimatedCost);
+			estCostText
+					.setText(String.valueOf(currentOrder.getSuggestAmount()));
 
-        if(currentOrder != null) {
+			TextView custQuoteText = (TextView) findViewById(R.id.customerQuote);
+			custQuoteText.setText(String.valueOf(currentOrder
+					.getCustomerAmount()));
 
-            ListView itemList = (ListView) findViewById(R.id.itemList);
+			ackBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					onAckButtonPress(orderId);
+				}
+			});
 
-            final int orderId = currentOrder.getOrderId();
-            TextView orderText = (TextView) findViewById(R.id.orderId);
-            orderText.setText(currentOrder.getOrderId());
+			cancelBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					onCancelButtonPress(orderId);
+				}
+			});
+			
+			deliveredBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					onDeliveredButtonPress(orderId);
+				}
 
-            TextView fromAddrText = (TextView) findViewById(R.id.fromAddress);
-            Address fromAddr = currentOrder.getFromlocation();
-            fromAddrText.setText(fromAddr.getAddress1() + " " + fromAddr.getCity() + " " +fromAddr.getCountry());
+				private void onDeliveredButtonPress(int orderId) {
+					
+					JSONObject json = new JSONObject();
+					try {
+						json.put("orderstatus", DELIVERED);
+					} 
+					catch (JSONException e) {
+						e.printStackTrace();
+					}
+					
+					execute(json);
+					
+				}
+			});
 
-            TextView toAddrText = (TextView) findViewById(R.id.toAddress);
-            Address toAddr = currentOrder.getTolocation();
-            toAddrText.setText(toAddr.getAddress1() + " " + toAddr.getCity() + " " + toAddr.getCountry());
+		}
+	}
 
-            // To populate the ListView with the packages(items) in that order
+	private void enableButton(Button deliveredBtn, Button ackBtn, Button cancelBtn) {
+		switch (btnRecognizer) {
+		// Delivery-1 and Request-3
+		case 1:
+			deliveredBtn.setVisibility(View.VISIBLE);
+			ackBtn.setVisibility(View.INVISIBLE);
+			cancelBtn.setVisibility(View.VISIBLE);
+			break;
+		case 3:
+			deliveredBtn.setVisibility(View.INVISIBLE);
+			cancelBtn.setVisibility(View.VISIBLE);
+			ackBtn.setVisibility(View.INVISIBLE);
+			break;
+		// Receipt-2
+		case 2:
+			deliveredBtn.setVisibility(View.INVISIBLE);
+			ackBtn.setVisibility(View.INVISIBLE);
+			cancelBtn.setVisibility(View.INVISIBLE);
+			break;
+		// Traveler- 4 to acknowledge
+		case 4:
+			deliveredBtn.setVisibility(View.INVISIBLE);
+			ackBtn.setVisibility(View.VISIBLE);
+			cancelBtn.setVisibility(View.INVISIBLE);
+			break;
 
-            List<Packages> packageList = currentOrder.getPackages();
-            ArrayList<String> itemArrayList = new ArrayList<String>();
-            for(Packages singlePackage : packageList)
-            {
-                itemArrayList.add(singlePackage.getContent());
-            }
-            itemAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,itemArrayList);
-            itemList.setAdapter(itemAdapter);
+		}
+	}
 
-            TextView estCostText = (TextView) findViewById(R.id.estimatedCost);
-            estCostText.setText(currentOrder.getSuggestAmount());
+	private void onAckButtonPress(int orderId){
 
-            TextView custQuoteText = (TextView) findViewById(R.id.customerQuote);
-            custQuoteText.setText(currentOrder.getCustomerAmount());
+		JSONObject json = new JSONObject();
+		try {
+			json.put("orderstatus", ACKNOWLEDGE);
+			json.put("travlerid", LiefernRepository.getInstance().getLoggedInUser().getUserId());
+		} 
+		catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		execute(json);
+	}
 
+	private void onCancelButtonPress(int orderId) {
 
-            ackBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onAckButtonPress(orderId);
-                }
-            });
+		JSONObject json = new JSONObject();
+		try {
+			json.put("orderstatus", CANCEL);
+		} 
+		catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		execute(json);
+	}
 
-            cancelBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onCancelButtonPress(orderId);
-                }
-            });
+	/**
+	 * Holds implementation of web service which you want to execute in
+	 * background thread.
+	 * 
+	 * @return Result
+	 * @throws Exception
+	 */
+	public WebServiceModel processService() throws Exception {
+		WebsevicesImpl wsImpl = new WebsevicesImpl();
+		return wsImpl.updateOrderStatus(orderId, this.getRequestType().toString());
+		
+	}
 
-        }
+	@Override
+	public void notifyWebResponse(WebServiceModel model) {
 
+		Intent intent = null;
 
-        else
-        {
-            // when there is no information to show
-            ackBtn.setVisibility(View.INVISIBLE);
-            cancelBtn.setVisibility(View.INVISIBLE);
-        }
+		Toast.makeText(getApplicationContext(),
+				"Request Placed Successfully !", Toast.LENGTH_LONG).show();
 
+		switch (btnRecognizer) {
+		// Delivery-1 and Request-3
+		case 1:
+			intent = new Intent(this, DeliveryActivity.class);
+			startActivity(intent);
+			break;
+		case 3:
+			intent = new Intent(this, RequestActivity.class);
+			startActivity(intent);
+			break;
+		// Receipt-2
+		case 2:
+			intent = new Intent(this, ReceiptActivity.class);
+			startActivity(intent);
+			break;
+		// Traveler- 4 to acknowledge
+		case 4:
+			intent = new Intent(this, DeliveryActivity.class);
+			startActivity(intent);
+			break;
 
-    }
+		}
+	}
 
-    private void enableButton(int btnRecognizer, Button ackBtn, Button cancelBtn)
-    {
-        switch(btnRecognizer)
-        {
-            // Delivery-1 and Request-3
-            case 1:
-            case 3:
-                cancelBtn.setVisibility(View.VISIBLE);
-                ackBtn.setEnabled(false);
-                break;
-            // Receipt-2
-            case 2:
-                ackBtn.setVisibility(View.INVISIBLE);
-                cancelBtn.setVisibility(View.INVISIBLE);
-                ackBtn.setEnabled(false);
-                cancelBtn.setEnabled(false);
-                break;
-            // Traveler- 4 to acknowledge
-            case 4:
-                ackBtn.setVisibility(View.VISIBLE);
-                break;
+	/**
+	 * Notifies response error.
+	 * 
+	 * @param model
+	 */
+	public void notifyWebResponseError(WebServiceModel model) {
 
-        }
-    }
+		Toast.makeText(getApplicationContext(), "Error. Please try again !",
+				Toast.LENGTH_LONG).show();
+		Intent intent = new Intent(this, MainActivity.class);
+		startActivity(intent);
+	}
 
-    private void onAckButtonPress(int orderId) {
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		// getMenuInflater().inflate(R.menu.menu_view_request, menu);
+		return true;
+	}
 
-        // Acknowledge
-        buttonPress = 1;
-        execute(orderId);
-    }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
 
-    private void onCancelButtonPress(int orderId) {
+		// noinspection SimplifiableIfStatement
+		if (id == R.id.action_settings) {
+			return true;
+		}
 
-        // Cancel
-        buttonPress = 2;
-        execute(orderId);
-    }
-
-
-    /**
-     * Holds implementation of web service which you want to execute in background thread.
-     * @return Result
-     * @throws Exception
-     */
-    public WebServiceModel processService() throws Exception{
-        WebsevicesImpl wsImpl = new WebsevicesImpl();
-        int orderId = Integer.parseInt(this.getRequestType().toString());
-
-        if(buttonPress == 1) {
-            return wsImpl.acknowledgeOrder(orderId);
-        }
-        else
-        {
-            return wsImpl.cancelOrder(orderId);
-        }
-    }
-
-    @Override
-    public void notifyWebResponse(WebServiceModel model) {
-
-        adapter = new RequestListAdapter(this, R.layout.request_list_item, LiefernRepository.getInstance().getRequestOrderList(), REQUEST_TYPE);
-        lstRequests.setAdapter(adapter);
-    }
-
-    /**
-     * Notifies response error.
-     * @param model
-     */
-    public void notifyWebResponseError(WebServiceModel model){
-
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_view_request, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
+		return super.onOptionsItemSelected(item);
+	}
 
 }

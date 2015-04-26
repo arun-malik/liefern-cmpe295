@@ -95,24 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/textView2"
-                    android:layout_below="@+id/textView2"
-                    android:layout_marginTop="20dp"
-                    android:text="Mobile"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:id="@+id/mobile"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="15sp"/>
+                
 
             </LinearLayout>
 
@@ -214,11 +197,21 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/deliveredButton"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="wrap_content"
+                android:text="Delivered"
+                 />
+            
+            <Button
                 android:id="@+id/acknowledgeButton"
                 android:layout_width="fill_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_height="wrap_content"
+                android:text="Acknowledge"
                  />
 
             <Button
@@ -227,6 +220,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_height="wrap_content"
+                android:text="Cancel"
                 />
 
 
