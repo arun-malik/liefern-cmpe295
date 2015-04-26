@@ -31,7 +31,9 @@ public final class WebServiceHelper {
 			try {
 				if(oHttpRequestBase != null) {
 					oHttpRequestBase.setHeader("Content-type", "application/json");
-					oHttpRequestBase.setHeader(Constants.TOKEN, LiefernRepository.getInstance().getAuthToken());
+					if(LiefernRepository.getInstance().getLoggedInUser()!= null ){
+						oHttpRequestBase.setHeader(Constants.TOKEN, LiefernRepository.getInstance().getLoggedInUser().getSessiontoken());
+					}
 					
 					HttpResponse oHttpResponse = NetworkUtility.getInstance().getNewHttpClient().execute(oHttpRequestBase);
 					
