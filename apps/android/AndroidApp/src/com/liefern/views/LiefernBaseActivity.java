@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.content.LocalBroadcastManager;
@@ -22,6 +23,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.liefern.R;
+import com.liefern.location.BootReceiver;
+import com.liefern.utility.SharedPreferenceStore;
 import com.liefern.webservices.models.WebServiceModel;
 
 public abstract class LiefernBaseActivity extends Activity {
@@ -80,6 +83,16 @@ public abstract class LiefernBaseActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		instance = this;
+		
+		// Send broadcast to set alarm if it is not set
+		if(!SharedPreferenceStore.getInstance().isAlarmSet()) {
+			final String ACTION_START_ALARM_MANAGER = "com.liefern.ACTION_START_ALARM_MANAGER";
+			BroadcastReceiver bootReceiver = new BootReceiver();
+			LocalBroadcastManager.getInstance(this).registerReceiver(bootReceiver, new IntentFilter(ACTION_START_ALARM_MANAGER));
+			LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(ACTION_START_ALARM_MANAGER));
+			LocalBroadcastManager.getInstance(this).unregisterReceiver(bootReceiver);
+		}
+		
 		LocalBroadcastManager.getInstance(this).registerReceiver(logoutReceiver, logoutFilter);
 	}
 

@@ -1,0 +1,7 @@
+.svn
+bin
+gen
+/apps/android/*.DS_Store
+/apps/android/AndroidApp/.settings
+/apps/android/AndroidApp/bin
+/apps/android/AndroidApp/*.DS_Store

@@ -14,6 +14,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import android.location.Location;
+
 import com.liefern.models.LiefernRepository;
 import com.liefern.models.Order;
 import com.liefern.models.Payments;
@@ -23,6 +25,7 @@ import com.liefern.webservices.models.LogoutResult;
 import com.liefern.webservices.models.PaymentCardResult;
 import com.liefern.webservices.models.PostOrderResult;
 import com.liefern.webservices.models.PostPaymentCardResult;
+import com.liefern.webservices.models.PutLocationResult;
 import com.liefern.webservices.models.PutOrderStatusResult;
 import com.liefern.webservices.models.RequestOrderResult;
 import com.liefern.webservices.models.SignUpResult;
@@ -143,6 +146,12 @@ public final class WebsevicesImpl {
 		httpPut.setEntity(new StringEntity(orderObj));
 		orderStatusResult.parse(WebServiceHelper.executeRequest(httpPut, 0));
 		return orderStatusResult;
+	}
+	
+	public PutLocationResult updateCurrentLocation(Location location) throws Exception {
+		PutLocationResult putLocationResult = new PutLocationResult();
+		// putLocationResult.parse(WebServiceHelper.executeRequest(oHttpRequestBase, responseType));
+		return putLocationResult;
 	}
 
 }

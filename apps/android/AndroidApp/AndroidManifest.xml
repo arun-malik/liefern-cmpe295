@@ -10,6 +10,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".LiefernApplication"
@@ -37,11 +39,12 @@
         <activity
             android:name=".views.SignUpActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
-         <activity
+        <activity
             android:name=".views.AddPackageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
             android:name=".views.RequestActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_request"
             android:parentActivityName=".views.LiefernBaseActivity" >
             <meta-data
@@ -50,40 +53,60 @@
         </activity>
         <activity
             android:name=".views.DeliveryActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_delivery" >
         </activity>
         <activity
             android:name=".views.ReceiptActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_receipt" >
         </activity>
         <activity
             android:name=".views.TravelerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_traveler" >
         </activity>
         <activity
             android:name=".views.ShopperPage1Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_shopper_page1" >
         </activity>
         <activity
             android:name=".views.ShopperPage2Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_shopper_page2" >
         </activity>
         <activity
             android:name=".views.ShopperPage3Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_shopper_page3" >
         </activity>
         <activity
             android:name=".views.ProfileActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_profile" >
         </activity>
         <activity
             android:name="com.liefern.views.PaymentsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_payments" >
         </activity>
         <activity
-            android:name=".views.ViewRequest"/>
+            android:name=".views.ViewRequest"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
-            android:name=".views.ViewRequestUser"/>
+            android:name=".views.ViewRequestUser"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+
+        <receiver
+            android:name="com.liefern.location.BootReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.liefern.location.AlarmReceiver" />
     </application>
 
 </manifest>
