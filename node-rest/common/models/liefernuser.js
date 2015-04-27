@@ -119,7 +119,7 @@ module.exports = function(Liefernuser) {
                 next(new Error(err));
             }
 
-            if(user !== null){
+            if(user === null){
                 next(new Error("Invalid Token. Please login again"));
             }else{
                 user.sessiontoken = null;
