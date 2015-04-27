@@ -83,6 +83,7 @@ public final class LiefernRepository {
 			this.loggedInUser.setEmailId(responseJson.optString(Constants.EMAIL));
 			this.loggedInUser.setMobile(responseJson.optString(Constants.MOBILE));
 			this.loggedInUser.setUserId(responseJson.optInt(Constants.USEER_ID));
+			this.loggedInUser.setSessiontoken(responseJson.optString(Constants.SESSION_TOKEN));
 		}
 		this.loggedInUser.setName(responseJson.optString(Constants.NAME));
 		try {
