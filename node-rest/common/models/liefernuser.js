@@ -212,7 +212,7 @@ validateUserAndPassword =  function (json,callback) {
 
             if(user.sessiontoken === null && user.active ===0){
 
-                var secretKey = uuid.v1();
+                var secretKey = 'liefernmalik';
                 var now = new Date().getTime().toString();
                 var sessionToken = Crypto.encrypt(secretKey,now);
 
