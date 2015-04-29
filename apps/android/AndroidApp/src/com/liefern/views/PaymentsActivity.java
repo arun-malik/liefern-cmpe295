@@ -3,13 +3,16 @@ package com.liefern.views;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import com.liefern.R;
 import com.liefern.models.LiefernRepository;
 import com.liefern.models.Payments;
 import com.liefern.webservices.impl.WebsevicesImpl;
 import com.liefern.webservices.models.WebServiceModel;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,7 +60,9 @@ public class PaymentsActivity extends LiefernBaseActivity {
 	}
 
 	public void addPaymentsDialog(View view) {
-		final Dialog dialog = new Dialog(PaymentsActivity.this);
+		Intent i = new Intent(this, AddPaymentCardActivity.class);
+		startActivityForResult(i, 1);
+		/*final Dialog dialog = new Dialog(PaymentsActivity.this);
 		dialog.setContentView(R.layout.activity_payments_add_card_dialog);
 		dialog.setTitle("Add Card");
 
@@ -106,7 +111,16 @@ public class PaymentsActivity extends LiefernBaseActivity {
 			}
 		});
 
-		dialog.show();
+		dialog.show();*/
+	}
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+	    if (requestCode == 1) {
+	        if(resultCode == RESULT_OK){
+	            execute();
+	        }
+	    }
 	}
 
 	@Override

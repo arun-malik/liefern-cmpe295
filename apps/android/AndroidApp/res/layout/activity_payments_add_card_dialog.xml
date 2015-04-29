@@ -10,19 +10,16 @@
         android:orientation="vertical" >
 
         <TextView
-            android:layout_width="match_parent"
-        	android:layout_height="wrap_content"
-        	android:gravity="center"
-            android:text="Add Card" />
+            style="@style/FormHeading"
+            android:text="Add Package" />
 
         <com.liefern.widgets.OpaqueLinearLayout style="@style/CardViewStyle" >
 
             <EditText
                 android:id="@+id/cardNumberText"
                 style="@style/InputEditText"
-                android:hint="Card Number"/>
-
-            
+                android:hint="Card Number"
+                android:inputType="numberDecimal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,8 +51,7 @@
             <EditText
                 android:id="@+id/nameOnCardText"
                 style="@style/InputEditText"
-                android:hint="Name on card"
-                android:inputType="numberDecimal" />
+                android:hint="Name on card" />
 
             <Button
                 android:id="@+id/dialogAddPaymentButton"

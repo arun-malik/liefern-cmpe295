@@ -35,5 +35,10 @@ public interface WebserviceURLs {
 			+ "&filter[where][orderStatus]=0&filter[where][customerid][neq]=";
 	
 	String UPDATE_ORDER_STATUS = BASE_URL + "Orders/";
+	
+	String POST_USER_GEO_LOCATION = BASE_URL + "Geos/";
+	
+	String GET_USER_GEO_LOCATION = BASE_URL + "Geos/";
+	
 
 }

@@ -1,7 +1,14 @@
 package com.liefern.location;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import com.liefern.models.Geos;
+import com.liefern.models.LiefernRepository;
 import com.liefern.webservices.impl.WebsevicesImpl;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
@@ -10,6 +17,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class LocationPollerThread implements Runnable, LocationListener {
+	@SuppressLint("SimpleDateFormat")
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
 	static final String TAG = "LocationPollerThread";
 	private LocationManager locationManager;
 	
@@ -24,6 +34,7 @@ public class LocationPollerThread implements Runnable, LocationListener {
 	
 	@Override
 	public void onLocationChanged(Location location) {
+		if(LiefernRepository.getInstance().getLoggedInUser() !=null)
 		manageLocation(location);
 		stopLocationSearch();
 	}
@@ -45,9 +56,20 @@ public class LocationPollerThread implements Runnable, LocationListener {
 
 	private void manageLocation(Location location) {
 		Log.d(getClass().getSimpleName(), "Current location --> " + location.toString());
+		Geos geo = new Geos();
+		geo.setLat((float)location.getLatitude());
+		geo.setLat((float)location.getLongitude());
+		geo.setRadius(location.getAccuracy());
+		geo.setUserId(LiefernRepository.getInstance().getLoggedInUser().getUserId());
+		try {
+			geo.setCreatedDate(sdf.parse(sdf.format(new Date())));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		WebsevicesImpl updateLocationService = new WebsevicesImpl();
 		try {
-			updateLocationService.updateCurrentLocation(location);
+			updateLocationService.updateCurrentLocation(geo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

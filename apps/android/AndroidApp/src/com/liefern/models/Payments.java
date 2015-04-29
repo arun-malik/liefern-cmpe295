@@ -11,7 +11,7 @@ public class Payments {
 
 	 private int paymentId = -1;
 	 private int userId = -1;
-	 private int creditCardNo = -1;
+	 private long creditCardNo = -1L;
 	 private int cvv = -1 ;
 	 private int expiryMonth = -1;
 	 private int expiryYear = -1;
@@ -66,14 +66,14 @@ public class Payments {
 
 
 
-	public int getCreditCardNo() {
+	public long getCreditCardNo() {
 		return creditCardNo;
 	}
 
 
 
 
-	public void setCreditCardNo(int creditCardNo) {
+	public void setCreditCardNo(long creditCardNo) {
 		this.creditCardNo = creditCardNo;
 	}
 
