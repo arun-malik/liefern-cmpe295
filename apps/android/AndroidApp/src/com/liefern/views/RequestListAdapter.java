@@ -78,7 +78,7 @@ public class RequestListAdapter extends BaseAdapter {
 				TextView price = (TextView) convertView
 						.findViewById(R.id.price);
 
-				price.setText(Integer.toString(list.get(position).getCustomerAmount()));
+				price.setText("$"+Integer.toString(list.get(position).getCustomerAmount()));
 
 			} catch (Exception ex) {
 				Log.d("Arun Malik","Exception : "+ ex.getMessage());

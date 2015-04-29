@@ -69,7 +69,7 @@ public class ViewRequest extends LiefernBaseActivity {
 
 			final int orderId = currentOrder.getOrderId();
 			TextView orderText = (TextView) findViewById(R.id.orderId);
-			orderText.setText(String.valueOf(currentOrder.getOrderId()));
+			orderText.setText("Order Number "+String.valueOf(currentOrder.getOrderId()));
 
 			TextView fromAddrText = (TextView) findViewById(R.id.fromAddress);
 			Address fromAddr = currentOrder.getFromlocation();
@@ -81,35 +81,33 @@ public class ViewRequest extends LiefernBaseActivity {
 			toAddrText.setText(toAddr.getAddress1() + " " + toAddr.getCity()
 					+ " " + toAddr.getCountry());
 
+			
 			// To populate the ListView with the packages(items) in that order
 			List<Packages> packageList = currentOrder.getPackages();
 			if (null != packageList && packageList.size() > 0) {
 				ArrayList<String> itemArrayList = new ArrayList<String>();
 				int totalWeight = 0;
 				for (Packages singlePackage : packageList) {
-					StringBuilder sb = new StringBuilder();
-					sb.append(singlePackage.getDescription()).append("--")
-							.append(singlePackage.getContent()).append("--")
-							.append(singlePackage.getSize());
-					itemArrayList.add(sb.toString());
 					totalWeight += singlePackage.getWeight();
 				}
 
-				itemAdapter = new ArrayAdapter<String>(this,
-						android.R.layout.simple_list_item_1, itemArrayList);
-				itemList.setAdapter(itemAdapter);
+				adapter = new PackageListAdapter(this, R.layout.request_list_item, packageList);
+				itemList.setAdapter(adapter);
 				
 				TextView totalWeightText = (TextView) findViewById(R.id.totalWeight);
-				totalWeightText.setText(String.valueOf(totalWeight));
+				totalWeightText.setText(String.valueOf("Total Package Weight :"+totalWeight));
 			}
 
 			TextView estCostText = (TextView) findViewById(R.id.estimatedCost);
 			estCostText
-					.setText(String.valueOf(currentOrder.getSuggestAmount()));
+					.setText("Estimated Price $" + String.valueOf(currentOrder.getSuggestAmount()));
 
 			TextView custQuoteText = (TextView) findViewById(R.id.customerQuote);
-			custQuoteText.setText(String.valueOf(currentOrder
+			custQuoteText.setText("Customer's Price $"+String.valueOf(currentOrder
 					.getCustomerAmount()));
+			
+			TextView  orderStatus = (TextView) findViewById(R.id.orderStatus);
+			orderStatus.setText(currentOrder.getOrderStatus() == 0 ? "PENDING" : currentOrder.getOrderStatus() == 1 ? "ACKNOWLEDGE" : currentOrder.getOrderStatus() == 4 ? "CANCELLED"  : currentOrder.getOrderStatus() == 5 ? "DELIVERED" : "INVALID ORDER STATUS" );
 
 			ackBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
