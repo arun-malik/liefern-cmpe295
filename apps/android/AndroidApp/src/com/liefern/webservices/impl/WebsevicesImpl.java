@@ -15,7 +15,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.location.Location;
+import android.util.Log;
 
+import com.liefern.models.Geos;
 import com.liefern.models.LiefernRepository;
 import com.liefern.models.Order;
 import com.liefern.models.Payments;
@@ -148,9 +150,12 @@ public final class WebsevicesImpl {
 		return orderStatusResult;
 	}
 	
-	public PutLocationResult updateCurrentLocation(Location location) throws Exception {
+	public PutLocationResult updateCurrentLocation(Geos location) throws Exception {
 		PutLocationResult putLocationResult = new PutLocationResult();
-		// putLocationResult.parse(WebServiceHelper.executeRequest(oHttpRequestBase, responseType));
+		HttpPost httpPost = new HttpPost(WebserviceURLs.POST_USER_GEO_LOCATION);
+		httpPost.setEntity(new StringEntity(location.toJSON().toString()));
+		Log.d("Json object", location.toJSON().toString());
+		putLocationResult.parseJSON(WebServiceHelper.executeRequest(httpPost, 0));
 		return putLocationResult;
 	}
 

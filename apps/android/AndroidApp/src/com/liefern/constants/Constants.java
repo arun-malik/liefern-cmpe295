@@ -57,4 +57,9 @@ public interface Constants {
 	String NAME_ON_CARD = "nameoncard";
 	String ADDRESS = "address";
 	
+	String RADIUS = "radius";
+	String LATITUDE = "lat";
+	String LONGITUDE = "lng";
+	
+	
 }
