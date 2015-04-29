@@ -35,7 +35,7 @@ public class ProfileActivity extends LiefernBaseActivity {
 
 	private void setContent() {
 		User usr = LiefernRepository.getInstance().getLoggedInUser();
-		EditText text = (EditText) findViewById(R.id.profName);
+		EditText text = (EditText) findViewById(R.id.name);
 		text.setText(usr.getName());
 		text = (EditText) findViewById(R.id.profileEmailText);
 		text.setText(usr.getEmailId());
@@ -110,7 +110,7 @@ public class ProfileActivity extends LiefernBaseActivity {
 	
 	public User setUser() {
 		User usr = LiefernRepository.getInstance().getLoggedInUser();
-		EditText text = (EditText) findViewById(R.id.profName);
+		EditText text = (EditText) findViewById(R.id.name);
 		usr.setName(text.getText().toString());
 		text = (EditText) findViewById(R.id.profileAddress1Text);
 		usr.getAddress().setAddress1(text.getText().toString());

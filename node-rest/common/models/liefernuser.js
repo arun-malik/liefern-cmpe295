@@ -119,7 +119,7 @@ module.exports = function(Liefernuser) {
                 next(new Error(err));
             }
 
-            if(user !== null){
+            if(user === null){
                 next(new Error("Invalid Token. Please login again"));
             }else{
                 user.sessiontoken = null;
@@ -212,7 +212,7 @@ validateUserAndPassword =  function (json,callback) {
 
             if(user.sessiontoken === null && user.active ===0){
 
-                var secretKey = uuid.v1();
+                var secretKey = 'liefernmalik';
                 var now = new Date().getTime().toString();
                 var sessionToken = Crypto.encrypt(secretKey,now);
 
