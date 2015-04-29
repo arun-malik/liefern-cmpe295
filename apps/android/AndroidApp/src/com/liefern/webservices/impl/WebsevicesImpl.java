@@ -108,6 +108,7 @@ public final class WebsevicesImpl {
 			throws Exception {
 		PostPaymentCardResult postPaymentCardResult = new PostPaymentCardResult();
 		HttpPost httpPost = new HttpPost(WebserviceURLs.POST_PAYMENT_CARD_URL);
+		Log.d("post card: ", card.toJSON().toString());
 		httpPost.setEntity(new StringEntity(card.toJSON().toString()));
 		postPaymentCardResult.parseJSON(WebServiceHelper.executeRequest(
 				httpPost, 0));

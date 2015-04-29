@@ -92,6 +92,11 @@
             android:label="@string/title_activity_payments" >
         </activity>
         <activity
+            android:name="com.liefern.views.AddPaymentCardActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_payments" >
+        </activity>
+        <activity
             android:name=".views.ViewRequest"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
