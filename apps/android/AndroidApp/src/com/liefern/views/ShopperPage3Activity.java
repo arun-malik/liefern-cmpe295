@@ -3,9 +3,11 @@ package com.liefern.views;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import com.liefern.R;
 import com.liefern.models.LiefernRepository;
+import com.liefern.models.Packages;
 import com.liefern.webservices.impl.WebsevicesImpl;
 import com.liefern.webservices.models.WebServiceModel;
 
@@ -25,6 +27,17 @@ public class ShopperPage3Activity extends LiefernBaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_shopper_page3);
+		List<Packages> packageList = LiefernRepository.getInstance().getBuiltOrder().getPackages();
+		
+		EditText wt = (EditText) findViewById(R.id.totalWeightText);
+		
+		if (null != packageList && packageList.size() > 0) {
+			int totalWeight = 0;
+			for (Packages singlePackage : packageList) {
+				totalWeight += singlePackage.getWeight();
+			}
+			wt.setText("Total weight : " + String.valueOf(totalWeight));
+		}  
 	}
 
 	@Override

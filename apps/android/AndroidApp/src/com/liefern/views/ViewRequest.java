@@ -85,7 +85,6 @@ public class ViewRequest extends LiefernBaseActivity {
 			// To populate the ListView with the packages(items) in that order
 			List<Packages> packageList = currentOrder.getPackages();
 			if (null != packageList && packageList.size() > 0) {
-				ArrayList<String> itemArrayList = new ArrayList<String>();
 				int totalWeight = 0;
 				for (Packages singlePackage : packageList) {
 					totalWeight += singlePackage.getWeight();
