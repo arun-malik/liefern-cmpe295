@@ -273,10 +273,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<img src="images/msg-icon.png" title="mail" />
 						<h3>Get Notified of any updates!</h3>
 						<p>Subscribe to our newsletter to be notified about new version release</p>
-						<form>
-							<input type="text" class="text" value="Your email address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your email address';}">
-							<input type="submit" value="Submit" />
-						</form>
+						<input type="text" class="text" id="emailAddr" value="Your email address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your email address';}">
+							<input type="submit" value="Submit" id="subscribe"/>
+
 					</div>
 				</div>
 			</div>
@@ -322,6 +321,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<!----- social-icons ---->
 		</div>
 		<!---- container ---->
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#subscribe").on("click", function(){
+				$.get("http://localhost:8080/emailsubscription-1.0-SNAPSHOT/rest/email/subscribe?email="+$("#emailAddr").val(), function(){
+					alert("Success");
+				});
+			});
+		});
+	</script>
 	</body>
 </html>
 
