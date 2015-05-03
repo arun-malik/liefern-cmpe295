@@ -7,6 +7,7 @@
     }
     #owl-demo .item img{
         height: auto;
+		border: 2px solid #98D361;
     }
      #owl-demo1 .item img{
         height: auto;

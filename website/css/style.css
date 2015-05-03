@@ -211,7 +211,7 @@ ul.usefull-for li a.u-windows span:hover{
 }
 /*----- testmonials-----*/
 .testmonial-grids{
-	padding:4em 0;
+	/*padding:4em 0;*/
 }
 .testmonial-head p{
 	color: #8C9494;
@@ -229,7 +229,8 @@ ul.usefull-for li a.u-windows span:hover{
 }
 .t-people-right{
 	float:right;
-	width:60%;
+	width:55%;
+	font-size: 12px;
 	text-align:left;
 }
 .t-people-right h4{
@@ -862,6 +863,12 @@ ul.usefull-for li a.u-windows span:hover{
 		margin: 0em auto 1em;
 	}
 }
-
+.owl-item{
+	margin-bottom: 30px;
+}
+.t-people-left img{
+	border-radius: 50px;
+	border: 2px solid #98D361;
+}
 
 

@@ -61,13 +61,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							 <!-- start content_slider -->
 						       <div id="owl-demo" class="owl-carousel">
 					                <div class="item">
-					                	<img src="images/divice.png" title="name" />
+					                	<img src="images/AppMenu.png" title="name" />
 					                </div>
 					                <div class="item">
-					                	<img src="images/divice.png" title="name" />
+					                	<img src="images/orderDetails.png" title="name" />
 					                </div>
 					                <div class="item">
-					                	<img src="images/divice.png" title="name" />
+					                	<img src="images/profileActivity.png" title="name" />
 					                </div>
 				              </div>
 						<!--//sreen-gallery-cursual---->
@@ -81,9 +81,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<li><a class="btn-gr" href="#">learn more</a></li>
 					</ul>
 					<ul class="usefull-for">
+						<!-- <li><a class="u-and"href="#"><span> </span></a></li>
 						<li><a class="u-apple" href="#"><span> </span></a></li>
-						<li><a class="u-and"href="#"><span> </span></a></li>
-						<li><a class="u-windows" href="#"><span> </span></a></li>
+						<li><a class="u-windows" href="#"><span> </span></a></li>  !-->
 					</ul>
 				</div>
 				<div class="clearfix"> </div>
@@ -227,7 +227,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					                		<div class="testmonial-head text-center">
 					                		</div>
 					                		<div class="testmonial-row">
-					                			<div class="col-md-4 testmonial-grid">
+					                			<div class="col-md-3 testmonial-grid">
 					                				<div class="t-people-left">
 					                					<img src="images/t-pic1.png" title="name" />
 					                				</div>
@@ -237,7 +237,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					                				</div>
 					                				<div class="clearfix"> </div>
 					                			</div>
-					                			<div class="col-md-4 testmonial-grid">
+					                			<div class="col-md-3 testmonial-grid">
 					                				<div class="t-people-left">
 					                					<img src="images/t-pic2.png" title="name" />
 					                				</div>
@@ -247,19 +247,32 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					                				</div>
 					                				<div class="clearfix"> </div>
 					                			</div>
-					                			<div class="col-md-4 testmonial-grid">
+
+					                			<div class="col-md-3 testmonial-grid">
 					                				<div class="t-people-left">
-					                					<img src="images/t-pic3.png" title="name" />
+					                					<img src="images/t-pic3.jpg" title="name" />
 					                				</div>
 					                				<div class="t-people-right">
-					                					<h4>Anna Yeaman</h4>
-					                					<span>Creative Director </span>
+					                					<h4>Ram Karnati</h4>
+					                					<span>Software Engineer </span>
 					                				</div>
 					                				<div class="clearfix"> </div>
-					                			</div>
+
+
 					                			<div class="clearfix"> </div>
 
 					                		</div>
+												<div class="col-md-3 testmonial-grid">
+													<div class="t-people-left">
+														<img src="images/t-pic4.jpg" title="name" />
+													</div>
+													<div class="t-people-right">
+														<h4>Shivraj Patil</h4>
+														<span>Software Engineer </span>
+													</div>
+													<div class="clearfix"> </div>
+
+												</div>
 					                	</div>
 					                </div>
 						<!--//sreen-gallery-cursual---->
@@ -286,7 +299,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<ul>
 						<li><a class="twitter" href="#"><span> </span></a></li>
 						<li><a class="facebook" href="#"><span> </span></a></li>
-						<li><a class="vemeo" href="#"><span> </span></a></li>
 						<li><a class="pin" href="#"><span> </span></a></li>
 						<div class="clearfix"> </div>
 					</ul>
@@ -294,7 +306,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<!---- footer-links ---->
 				<div class="footer-links">
 					<ul>
-						<li><p>Design by <a href="http://w3layouts.com/">W3layouts</a></p><span> </span></li>
+						<li><p>Developed by <a href="#">Team Liefern</a></p><span> </span></li>
 						<li><a href="#"> Terms of Use </a><span> </span></li>
 						<li><a href="#"> Support </a><span> </span></li>
 						<li><a href="#">  Help </a></li>
@@ -326,8 +338,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		$(document).ready(function(){
 			$("#subscribe").on("click", function(){
 				$.get("http://localhost:8080/emailsubscription-1.0-SNAPSHOT/rest/email/subscribe?email="+$("#emailAddr").val(), function(){
-					alert("Success");
+
 				});
+				alert("Success");
 			});
 		});
 	</script>
