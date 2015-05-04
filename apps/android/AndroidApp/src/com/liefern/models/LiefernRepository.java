@@ -28,6 +28,7 @@ public final class LiefernRepository {
 	private List<Payments> paymentCardList = new ArrayList<Payments>();
 	private Payments newCard;
 	private LiefernRepository() {}
+	private List<Geos> nearestUsers = new ArrayList<Geos>();
 
 	public static LiefernRepository getInstance() {
 		if(instance == null) {
@@ -65,9 +66,17 @@ public final class LiefernRepository {
 		requestOrderList.add(order);
 	}
 
+	public void addToNearestUserLocationList(Geos geo){
+		nearestUsers.add(geo);
+	}
 	public void clearOrderList(){
 		requestOrderList.clear();
 	}
+	
+	public void clearNearestUsersLocationList(){
+		nearestUsers.clear();
+	}
+
 
 
 	public List<Order> getRequestOrderList(){
@@ -145,6 +154,14 @@ public final class LiefernRepository {
 
 	public void setNewCard(Payments newCard) {
 		this.newCard = newCard;
+	}
+
+	public List<Geos> getNearestUsers() {
+		return nearestUsers;
+	}
+
+	public void setNearestUsers(List<Geos> nearestUsers) {
+		this.nearestUsers = nearestUsers;
 	}
 
 

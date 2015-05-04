@@ -22,6 +22,7 @@ import com.liefern.models.LiefernRepository;
 import com.liefern.models.Order;
 import com.liefern.models.Payments;
 import com.liefern.models.User;
+import com.liefern.webservices.models.LocationOfNearestUsers;
 import com.liefern.webservices.models.LoginResult;
 import com.liefern.webservices.models.LogoutResult;
 import com.liefern.webservices.models.PaymentCardResult;
@@ -31,6 +32,7 @@ import com.liefern.webservices.models.PutLocationResult;
 import com.liefern.webservices.models.PutOrderStatusResult;
 import com.liefern.webservices.models.RequestOrderResult;
 import com.liefern.webservices.models.SignUpResult;
+import com.liefern.webservices.models.WebServiceModel;
 
 @SuppressWarnings("deprecation")
 public final class WebsevicesImpl {
@@ -158,6 +160,14 @@ public final class WebsevicesImpl {
 		Log.d("Json object", location.toJSON().toString());
 		putLocationResult.parseJSON(WebServiceHelper.executeRequest(httpPost, 0));
 		return putLocationResult;
+	}
+
+	public LocationOfNearestUsers reqestNearestUsers() throws Exception {
+		LocationOfNearestUsers nearestUserLocationResult = new LocationOfNearestUsers();
+		HttpGet httpGet = new HttpGet(String.format( WebserviceURLs.GET_USER_GEO_LOCATION));
+		nearestUserLocationResult.parseJSON(WebServiceHelper
+				.executeRequest(httpGet, 1));
+		return nearestUserLocationResult;
 	}
 
 }
