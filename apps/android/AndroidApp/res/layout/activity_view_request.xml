@@ -100,6 +100,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent" />
             </com.liefern.widgets.OpaqueLinearLayout>
+            
 
             <Button
                 android:id="@+id/deliveredButton"
@@ -115,6 +116,10 @@
                 android:id="@+id/cancelButton"
                 style="@style/BlackButton"
                 android:text="Cancel" />
+            <Button
+                android:id="@+id/rateButton"
+                style="@style/BlackButton"
+                android:text="Feedback" />
         </LinearLayout>
 
     </LinearLayout>

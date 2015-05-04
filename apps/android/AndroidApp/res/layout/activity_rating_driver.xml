@@ -1,0 +1,52 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ParentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fadeScrollbars="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <com.liefern.widgets.OpaqueLinearLayout
+            style="@style/CardViewStyle"
+            android:layout_weight="5"
+            android:gravity="center" >
+            
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Please Rate Driver"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <RatingBar
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:numStars="5" />
+
+            <EditText
+                android:id="@+id/ratingComments"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:hint="Comments"
+                android:textColorHint="#FFFFFF" />
+        </com.liefern.widgets.OpaqueLinearLayout>
+        
+         <com.liefern.widgets.OpaqueLinearLayout style="@style/CardViewStyle" >
+
+                <Button
+                    android:id="@+id/updateRatings"
+                    style="@style/BlackButton"
+                    android:onClick="updateRating"
+                    android:text="Send Feedback" />
+            </com.liefern.widgets.OpaqueLinearLayout>
+    </LinearLayout>
+
+</ScrollView>

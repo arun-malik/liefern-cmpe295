@@ -47,13 +47,14 @@ public class ViewRequest extends LiefernBaseActivity {
 		Button deliveredBtn = (Button) findViewById(R.id.deliveredButton);
 		Button ackBtn = (Button) findViewById(R.id.acknowledgeButton);
 		Button cancelBtn = (Button) findViewById(R.id.cancelButton);
+		Button rateBtn = (Button) findViewById(R.id.rateButton);
 
 		int position = 0;
 		position = getIntent().getExtras().getInt("position");
 
 		btnRecognizer = getIntent().getExtras().getInt("currentActivity");
 
-		enableButton(deliveredBtn, ackBtn, cancelBtn);
+		enableButton(deliveredBtn, ackBtn, cancelBtn, rateBtn);
 
 		List<Order> orderList = LiefernRepository.getInstance()
 				.getRequestOrderList();
@@ -122,6 +123,13 @@ public class ViewRequest extends LiefernBaseActivity {
 				}
 			});
 			
+			rateBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					onRateButtonPress(orderId);
+				}
+			});
+			
 			deliveredBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
@@ -146,30 +154,34 @@ public class ViewRequest extends LiefernBaseActivity {
 		}
 	}
 
-	private void enableButton(Button deliveredBtn, Button ackBtn, Button cancelBtn) {
+	private void enableButton(Button deliveredBtn, Button ackBtn, Button cancelBtn, Button rateBtn) {
 		switch (btnRecognizer) {
 		// Delivery-1 and Request-3
 		case 1:
 			deliveredBtn.setVisibility(View.VISIBLE);
 			ackBtn.setVisibility(View.INVISIBLE);
 			cancelBtn.setVisibility(View.VISIBLE);
+			rateBtn.setVisibility(View.INVISIBLE);
 			break;
 		case 3:
 			deliveredBtn.setVisibility(View.INVISIBLE);
 			cancelBtn.setVisibility(View.VISIBLE);
 			ackBtn.setVisibility(View.INVISIBLE);
+			rateBtn.setVisibility(View.INVISIBLE);
 			break;
 		// Receipt-2
 		case 2:
 			deliveredBtn.setVisibility(View.INVISIBLE);
 			ackBtn.setVisibility(View.INVISIBLE);
 			cancelBtn.setVisibility(View.INVISIBLE);
+			rateBtn.setVisibility(View.VISIBLE);
 			break;
 		// Traveler- 4 to acknowledge
 		case 4:
 			deliveredBtn.setVisibility(View.INVISIBLE);
 			ackBtn.setVisibility(View.VISIBLE);
 			cancelBtn.setVisibility(View.INVISIBLE);
+			rateBtn.setVisibility(View.INVISIBLE);
 			break;
 
 		}
@@ -201,6 +213,22 @@ public class ViewRequest extends LiefernBaseActivity {
 			e.printStackTrace();
 		}
 		execute(json);
+	}
+	
+	private void onRateButtonPress(int orderId) {
+
+		/*JSONObject json = new JSONObject();
+		try {
+			json.put("orderstatus", CANCEL);
+		} 
+		catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		execute(json);*/
+		Intent intent = new Intent(this, RatingDriver.class);
+		intent.putExtra("orderID", orderId);
+		startActivity(intent);
 	}
 
 	/**

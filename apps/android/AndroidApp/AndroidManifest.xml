@@ -91,12 +91,12 @@
             android:label="@string/title_activity_profile" >
         </activity>
         <activity
-            android:name="com.liefern.views.PaymentsActivity"
+            android:name=".views.PaymentsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_payments" >
         </activity>
         <activity
-            android:name="com.liefern.views.AddPaymentCardActivity"
+            android:name=".views.AddPaymentCardActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_payments" >
         </activity>
@@ -115,14 +115,19 @@
             android:value="YOUR_KEY" />
 
         <receiver
-            android:name="com.liefern.location.BootReceiver"
+            android:name=".location.BootReceiver"
             android:enabled="true"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.liefern.location.AlarmReceiver" />
+        <receiver android:name=".location.AlarmReceiver" />
+
+        <activity
+            android:name="com.liefern.views.RatingDriver"
+            android:label="@string/title_activity_rating_driver" >
+        </activity>
     </application>
 
 </manifest>
