@@ -36,7 +36,7 @@ public interface WebserviceURLs {
 	
 	String UPDATE_ORDER_STATUS = BASE_URL + "Orders/";
 	
-	String POST_USER_GEO_LOCATION = BASE_URL + "Geos/";
+	String POST_USER_GEO_LOCATION = BASE_URL + "Geos/upsert";
 	
 	String GET_USER_GEO_LOCATION = BASE_URL + "Geos/";
 	

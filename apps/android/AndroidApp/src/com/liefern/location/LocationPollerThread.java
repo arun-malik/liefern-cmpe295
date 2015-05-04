@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.liefern.LiefernApplication;
 import com.liefern.models.Geos;
 import com.liefern.models.LiefernRepository;
 import com.liefern.webservices.impl.WebsevicesImpl;
@@ -15,6 +16,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 public class LocationPollerThread implements Runnable, LocationListener {
 	@SuppressLint("SimpleDateFormat")
@@ -24,16 +26,20 @@ public class LocationPollerThread implements Runnable, LocationListener {
 	private LocationManager locationManager;
 	
 	public LocationPollerThread(Context context) {
+		
 		locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 	}
 
 	@Override
 	public void run() {
+		//Log.d(this.getClass().getSimpleName(), "In Location Thread");
 		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
 	}
 	
 	@Override
 	public void onLocationChanged(Location location) {
+		/*Toast.makeText(LiefernApplication.getAppContext(), "Location Changed",
+				Toast.LENGTH_LONG).show();*/
 		if(LiefernRepository.getInstance().getLoggedInUser() !=null)
 		manageLocation(location);
 		stopLocationSearch();
@@ -58,7 +64,7 @@ public class LocationPollerThread implements Runnable, LocationListener {
 		Log.d(getClass().getSimpleName(), "Current location --> " + location.toString());
 		Geos geo = new Geos();
 		geo.setLat((float)location.getLatitude());
-		geo.setLat((float)location.getLongitude());
+		geo.setLng((float)location.getLongitude());
 		geo.setRadius(location.getAccuracy());
 		geo.setUserId(LiefernRepository.getInstance().getLoggedInUser().getUserId());
 		try {

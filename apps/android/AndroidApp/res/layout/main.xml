@@ -3,19 +3,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+    
+    
+	<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
 
+    
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="254dp" />
     <TextView
         style="@style/FormHeading"
         android:text="Please select Role" />
 
-    <com.liefern.widgets.OpaqueButton
-        android:id="@+id/travelerButton"
-        style="@style/OpaqueCardButton"
-        android:text="Traveler" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
 
-    <com.liefern.widgets.OpaqueButton
-        android:id="@+id/shopperButton"
-        style="@style/OpaqueCardButton"
-        android:text="Shopper" />
+        <com.liefern.widgets.OpaqueButton
+            android:id="@+id/travelerButton"
+            style="@style/OpaqueCardButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Traveler" />
+
+        <com.liefern.widgets.OpaqueButton
+            android:id="@+id/shopperButton"
+            style="@style/OpaqueCardButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shopper" />
+    </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

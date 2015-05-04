@@ -14,7 +14,7 @@ public class BootReceiver extends BroadcastReceiver {
 	
 	private AlarmManager alarmManager;
 	private PendingIntent alarmIntent;
-	private static final int POLLING_INTERVAL = 15 * 1000;
+	private static final int POLLING_INTERVAL = 30 * 1000;
 
 	@Override
 	public void onReceive(Context context, Intent data) {

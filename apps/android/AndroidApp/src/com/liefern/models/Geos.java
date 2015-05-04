@@ -28,7 +28,7 @@ public class Geos {
 			jsonObject.put(Constants.USEER_ID, this.getUserId());
 		jsonObject.put(Constants.RADIUS, this.getRadius());
 		jsonObject.put(Constants.LATITUDE, this.getLat());
-		jsonObject.put(Constants.LONGITUDE, this.getLat());
+		jsonObject.put(Constants.LONGITUDE, this.getLng());
 		jsonObject.put(Constants.CREATE_DATE, this.getCreatedDate());
 		
 		return jsonObject;
