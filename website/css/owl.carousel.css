@@ -11,7 +11,8 @@
     }
      #owl-demo1 .item img{
         height: auto;
-        width:100%;
+        width:77%;
+		 border: 2px solid #98D361;
     }
      #owl-demo2 div.owl-pagination{
         margin-bottom:3em;
