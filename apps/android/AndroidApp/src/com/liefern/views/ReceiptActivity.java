@@ -31,8 +31,9 @@ public class ReceiptActivity extends LiefernBaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.receipt);
 		instance = this;
+		
 		lstReceipts = (ListView) findViewById(R.id.lstReceipts);
-
+		
         lstReceipts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -43,7 +44,7 @@ public class ReceiptActivity extends LiefernBaseActivity {
 
 		execute();
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

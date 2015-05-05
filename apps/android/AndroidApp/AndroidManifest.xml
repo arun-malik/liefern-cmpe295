@@ -112,7 +112,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="YOUR_KEY" />
+            android:value="AIzaSyA1qoVSrR1atq8MnZym25XjhrTkN_wDeVY" />
 
         <receiver
             android:name=".location.BootReceiver"

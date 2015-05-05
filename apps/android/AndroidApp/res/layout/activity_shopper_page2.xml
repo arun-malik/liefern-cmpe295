@@ -37,18 +37,28 @@
         android:orientation="vertical"
         android:visibility="gone" >
 
+        <!--
         <ListView
             android:id="@+id/packageList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" >
         </ListView>
+        -->
+
+        <com.baoyz.swipemenulistview.SwipeMenuListView
+            android:id="@+id/listViewSwipe"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+         </com.baoyz.swipemenulistview.SwipeMenuListView>
 
         <Button
             android:id="@+id/nextShopperPage3"
             style="@style/BlackButton"
             android:onClick="nextShopperPage3"
             android:text="Next" />
+        
     </com.liefern.widgets.OpaqueLinearLayout>
 
 </LinearLayout>
