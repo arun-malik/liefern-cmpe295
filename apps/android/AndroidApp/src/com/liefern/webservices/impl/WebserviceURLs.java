@@ -40,5 +40,7 @@ public interface WebserviceURLs {
 	
 	String GET_USER_GEO_LOCATION = BASE_URL + "Geos/";
 	
+	String DELETE_PAYMENT_CARD_URL = BASE_URL + "payments/";
+	
 
 }

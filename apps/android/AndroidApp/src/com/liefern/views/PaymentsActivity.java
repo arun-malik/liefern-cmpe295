@@ -1,42 +1,98 @@
 package com.liefern.views;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
 import com.liefern.R;
 import com.liefern.models.LiefernRepository;
-import com.liefern.models.Payments;
 import com.liefern.webservices.impl.WebsevicesImpl;
 import com.liefern.webservices.models.WebServiceModel;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 
 public class PaymentsActivity extends LiefernBaseActivity {
 	
 	@SuppressLint("SimpleDateFormat")
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
+	private List<ApplicationInfo> mAppList;
 	BaseAdapter adaptor;
-	private ListView lstRequests;
+	private SwipeMenuListView lstRequests;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_payments);
-		lstRequests = (ListView) findViewById(R.id.cardList);
+		
+		mAppList = getPackageManager().getInstalledApplications(0);
+		SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+		    @Override
+		    public void create(SwipeMenu menu) {
+		    	// create "delete" item
+		        SwipeMenuItem deleteItem = new SwipeMenuItem(
+		                getApplicationContext());
+		        // set item background
+		        deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,
+		                0x3F, 0x25)));
+		        // set item width
+		        deleteItem.setWidth(dp2px(90));
+		        // set a icon
+		        deleteItem.setIcon(R.drawable.ic_delete);
+		        // add to menu
+		        menu.addMenuItem(deleteItem);
+		    }
+
+		};
+
+		lstRequests = (SwipeMenuListView) findViewById(R.id.cardList);//findViewById(R.id.packageList);
+		
+		// set creator
+		lstRequests.setMenuCreator(creator);
+		
+		lstRequests.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+				switch (index) {
+
+				case 0:
+					// delete
+					delete(position);
+					mAppList.remove(position);
+					adaptor.notifyDataSetChanged();
+					break;
+				}
+				return false;
+			}
+		});
+		
 		execute();
+	}
+	
+	private void delete(int position) {
+		LiefernRepository.getInstance().setDeleteCard(LiefernRepository.getInstance().getPaymentCardList().get(position));
+		LiefernRepository.getInstance().getPaymentCardList().remove(position);
+		execute();
+	}
+	
+	private int dp2px(int dp) {
+		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+				getResources().getDisplayMetrics());
 	}
 
 
@@ -62,56 +118,7 @@ public class PaymentsActivity extends LiefernBaseActivity {
 	public void addPaymentsDialog(View view) {
 		Intent i = new Intent(this, AddPaymentCardActivity.class);
 		startActivityForResult(i, 1);
-		/*final Dialog dialog = new Dialog(PaymentsActivity.this);
-		dialog.setContentView(R.layout.activity_payments_add_card_dialog);
-		dialog.setTitle("Add Card");
-
-
-		Button dialogButton = (Button) dialog.findViewById(R.id.dialogAddPaymentButton);
-		// if button is clicked, close the custom dialog
-		dialogButton.setOnClickListener( new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Payments card = new Payments();
-				EditText text = (EditText) dialog.findViewById(R.id.cardNumberText);
-				if(text.getText().toString()!= null && !text.getText().toString().isEmpty()){
-					card.setCreditCardNo(Integer.parseInt(text.getText().toString().trim()) );
-				}	
-				text = (EditText) dialog.findViewById(R.id.expireMonthText);
-				if(text.getText().toString()!= null && !text.getText().toString().isEmpty()){
-					card.setExpiryMonth(Integer.parseInt(text.getText().toString().trim()) );
-				}
-				text = (EditText) dialog.findViewById(R.id.expireYearText);
-				if(text.getText().toString()!= null && !text.getText().toString().isEmpty()){
-					card.setExpiryYear(Integer.parseInt(text.getText().toString().trim()) );
-				}
-				
-				text = (EditText) dialog.findViewById(R.id.securityCodeText);
-				if(text.getText().toString()!= null && !text.getText().toString().isEmpty()){
-					card.setCvv(Integer.parseInt(text.getText().toString().trim()) );
-				}
-				text = (EditText) dialog.findViewById(R.id.nameOnCardText);
-				card.setNameOnCard(text.getText().toString().trim());
-				
-				card.setUserId(LiefernRepository.getInstance().getLoggedInUser().getUserId());
-				
-				try {
-					card.setCreatedDate(sdf.parse(sdf.format(new Date())));
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				LiefernRepository.getInstance().setNewCard(card);
-				//LiefernRepository.getInstance().addPaymentCard(card);
-				execute();
-				dialog.dismiss();
-			}
-		});
-
-		dialog.show();*/
+		
 	}
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -126,9 +133,9 @@ public class PaymentsActivity extends LiefernBaseActivity {
 	@Override
 	public WebServiceModel processService() throws Exception {
 		WebsevicesImpl wsImpl = new WebsevicesImpl();
-		//Integer i = (Integer) getRequestType();
-		//if(i.intValue() == 1) {
-		if(LiefernRepository.getInstance().getNewCard() == null){
+		if(LiefernRepository.getInstance().getDeleteCard() != null){
+			return wsImpl.deletePaymentCard(LiefernRepository.getInstance().getDeleteCard().getPaymentId());
+		} else if(LiefernRepository.getInstance().getNewCard() == null){
 			return wsImpl.requestPaymentCards();
 		} else {
 			return wsImpl.postPaymentCard(LiefernRepository.getInstance().getNewCard());
@@ -137,9 +144,11 @@ public class PaymentsActivity extends LiefernBaseActivity {
 
 	@Override
 	public void notifyWebResponse(WebServiceModel model) {
+		 
 		 adaptor = new PaymentCardListAdaptor(this, R.layout.request_list_item, LiefernRepository.getInstance().getPaymentCardList());
 	     lstRequests.setAdapter(adaptor);
 	     LiefernRepository.getInstance().setNewCard(null);
+	     LiefernRepository.getInstance().setDeleteCard(null);
 	}
 
 	@Override

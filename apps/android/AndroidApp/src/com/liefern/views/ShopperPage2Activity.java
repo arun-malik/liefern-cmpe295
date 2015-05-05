@@ -112,38 +112,6 @@ public class ShopperPage2Activity extends LiefernBaseActivity {
 	public void addPackagesButton(View view) {
 		Intent intent = new Intent(this, AddPackageActivity.class);
 		startActivity(intent);
-		// custom dialog
-		/*final Dialog dialog = new Dialog(ShopperPage2Activity.this);
-		dialog.setContentView(R.layout.activity_shopper_add_package_dialog);
-		dialog.setTitle("Add Package");
-
-
-		Button dialogButton = (Button) dialog.findViewById(R.id.addPackDialog);
-		dialogButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Packages pack = new Packages();
-				EditText text = (EditText) dialog.findViewById(R.id.packageDescText);
-				pack.setDescription( text.getText().toString() );
-				text = (EditText) dialog.findViewById(R.id.packageContentText);
-				pack.setContent( text.getText().toString() );
-				text = (EditText) dialog.findViewById(R.id.packageSizeText);
-				pack.setSize( text.getText().toString() );
-				text = (EditText) dialog.findViewById(R.id.packageWeightText);
-				if(text.getText().toString()!= null && !text.getText().toString().isEmpty()){
-					pack.setWeight( Integer.parseInt(text.getText().toString()) );
-				}
-
-				LiefernRepository.getInstance().getBuiltOrder().addPackage(pack);
-				adaptor = new PackageListAdapter(ShopperPage2Activity.this, R.layout.request_list_item, LiefernRepository.getInstance().getBuiltOrder().getPackages());
-				lstRequests.setAdapter(adaptor);
-				dialog.dismiss();
-			}
-		});
-		dialog.show();*/
-
 	}
 
 	@Override

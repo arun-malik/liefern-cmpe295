@@ -1,20 +1,10 @@
 package com.liefern.webservices.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-
-import android.location.Location;
 import android.util.Log;
 
 import com.liefern.models.Geos;
@@ -22,6 +12,7 @@ import com.liefern.models.LiefernRepository;
 import com.liefern.models.Order;
 import com.liefern.models.Payments;
 import com.liefern.models.User;
+import com.liefern.webservices.models.DeletePaymentCard;
 import com.liefern.webservices.models.LocationOfNearestUsers;
 import com.liefern.webservices.models.LoginResult;
 import com.liefern.webservices.models.LogoutResult;
@@ -168,6 +159,14 @@ public final class WebsevicesImpl {
 		nearestUserLocationResult.parseJSON(WebServiceHelper
 				.executeRequest(httpGet, 1));
 		return nearestUserLocationResult;
+	}
+
+	public DeletePaymentCard deletePaymentCard(int paymentId) throws Exception {
+		DeletePaymentCard deletePaymentCardResult = new DeletePaymentCard();
+		HttpDelete httpdelete = new HttpDelete(WebserviceURLs.DELETE_PAYMENT_CARD_URL + paymentId);
+		deletePaymentCardResult.parseJSON(WebServiceHelper.executeRequest(
+				httpdelete, 2));
+		return deletePaymentCardResult;
 	}
 
 }

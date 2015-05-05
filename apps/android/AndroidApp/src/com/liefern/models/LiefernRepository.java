@@ -27,6 +27,7 @@ public final class LiefernRepository {
 	private Order builtOrder = new Order(); 
 	private List<Payments> paymentCardList = new ArrayList<Payments>();
 	private Payments newCard;
+	private Payments deleteCard;
 	private LiefernRepository() {}
 	private List<Geos> nearestUsers = new ArrayList<Geos>();
 
@@ -162,6 +163,14 @@ public final class LiefernRepository {
 
 	public void setNearestUsers(List<Geos> nearestUsers) {
 		this.nearestUsers = nearestUsers;
+	}
+
+	public Payments getDeleteCard() {
+		return deleteCard;
+	}
+
+	public void setDeleteCard(Payments deleteCard) {
+		this.deleteCard = deleteCard;
 	}
 
 

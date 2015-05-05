@@ -16,15 +16,24 @@
 
         <com.liefern.widgets.OpaqueLinearLayout style="@style/CardViewStyle" >
 
-            <ListView
+            <!--
+                 <ListView
                 android:id="@+id/cardList"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
+            -->
+
+            <com.baoyz.swipemenulistview.SwipeMenuListView
+                android:id="@+id/cardList"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" >
+            </com.baoyz.swipemenulistview.SwipeMenuListView>
 
             <Button
                 android:id="@+id/addPayment"
-                 style="@style/BlackButton"
+                style="@style/BlackButton"
                 android:onClick="addPaymentsDialog"
                 android:text="Add Card" />
         </com.liefern.widgets.OpaqueLinearLayout>
