@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.liefern.R;
 import com.liefern.models.LiefernRepository;
+import com.liefern.models.Order;
 import com.liefern.models.Packages;
 import com.liefern.webservices.impl.WebsevicesImpl;
 import com.liefern.webservices.models.WebServiceModel;
@@ -100,6 +101,7 @@ public class ShopperPage3Activity extends LiefernBaseActivity {
 
 	@Override
 	public void notifyWebResponse(WebServiceModel model) {
+		LiefernRepository.getInstance().setBuiltOrder(new Order());
 		Toast.makeText(getApplicationContext(), "Request Placed Successfully !",
 				Toast.LENGTH_LONG).show();
 		Intent intent = new Intent(this, RequestActivity.class);
