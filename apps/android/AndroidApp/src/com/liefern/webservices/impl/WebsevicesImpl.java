@@ -49,6 +49,7 @@ public final class WebsevicesImpl {
 	}
 
 	public SignUpResult signUp(User user) throws Exception {
+		LiefernRepository.getInstance().setSignupFlag(true);
 		SignUpResult signUpResult = new SignUpResult();
 		HttpPost httpPost = new HttpPost(WebserviceURLs.SIGN_UP_URL);
 		httpPost.setEntity(new StringEntity(user.toJSON().toString()));

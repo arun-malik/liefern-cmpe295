@@ -13,12 +13,17 @@ public class LoginResult extends WebServiceModel {
 	@Override
 	public void parseJSON(JSONObject jsonObject) throws Exception {
 		parse(jsonObject);
-		
-		JSONObject responseJson = (JSONObject) jsonObject.get("response");		
-		LiefernRepository.getInstance().createUser(responseJson);
-		
-		Log.d("Arun Malik","UserId : "+ LiefernRepository.getInstance().getLoggedInUser().getUserId());
-		Log.d("Arun Malik","User Object : "+ LiefernRepository.getInstance().getLoggedInUser().toJSON());
+		if (LiefernRepository.getInstance().isSignupFlag()) {
+			LiefernRepository.getInstance().createUser(jsonObject);
+			LiefernRepository.getInstance().setSignupFlag(false);
+		} else {
+			JSONObject responseJson = (JSONObject) jsonObject.get("response");
+			LiefernRepository.getInstance().createUser(responseJson);
+		}
+		Log.d("Arun Malik", "UserId : "
+				+ LiefernRepository.getInstance().getLoggedInUser().getUserId());
+		Log.d("Arun Malik", "User Object : "
+				+ LiefernRepository.getInstance().getLoggedInUser().toJSON());
 	}
 
 }

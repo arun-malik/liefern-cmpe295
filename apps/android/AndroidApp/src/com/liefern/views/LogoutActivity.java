@@ -43,7 +43,7 @@ public class LogoutActivity extends LiefernBaseActivity {
 	public void notifyWebResponseError(WebServiceModel model) {
 		dialog.cancel();
 		dialog = null;
-		finish();
+//		finish();
 	}
 	
 	public void showLogOutDialog() {

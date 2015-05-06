@@ -21,6 +21,7 @@ public final class LiefernRepository {
 	private static final Object obj = new Object();
 	private static LiefernRepository instance;
 
+	private boolean signupFlag;
 	private User loggedInUser;
 	private String authToken;
 	private List<Order> requestOrderList = new ArrayList<Order>();
@@ -84,16 +85,27 @@ public final class LiefernRepository {
 		return requestOrderList;
 	}
 
-	public void createUser(JSONObject responseJson){
+	public void createUser(JSONObject responseJson) throws JSONException{
 		if(		this.loggedInUser == null){
 			this.loggedInUser = new User();
-			this.loggedInUser.setActive(Integer.parseInt(responseJson.optString(Constants.ACTIVE)) == 1 ? true : false); 
-			this.loggedInUser.setAvgRating((responseJson.optString(Constants.AVG_RATING) == null ||responseJson.optString(Constants.AVG_RATING) == "") ? 0 
-					: responseJson.optInt(Constants.AVG_RATING));
-			this.loggedInUser.setEmailId(responseJson.optString(Constants.EMAIL));
-			this.loggedInUser.setMobile(responseJson.optString(Constants.MOBILE));
-			this.loggedInUser.setUserId(responseJson.optInt(Constants.USEER_ID));
-			this.loggedInUser.setSessiontoken(responseJson.optString(Constants.SESSION_TOKEN));
+//			this.loggedInUser.setActive(Integer.parseInt(responseJson.optString(Constants.ACTIVE)) == 1 ? true : false); 
+//			this.loggedInUser.setAvgRating((responseJson.optString(Constants.AVG_RATING) == null ||responseJson.optString(Constants.AVG_RATING) == "") ? 0 
+//					: responseJson.optInt(Constants.AVG_RATING));
+//			this.loggedInUser.setEmailId(responseJson.optString(Constants.EMAIL));
+//			this.loggedInUser.setMobile(responseJson.optString(Constants.MOBILE));
+//			this.loggedInUser.setUserId(responseJson.optInt(Constants.USEER_ID));
+//			this.loggedInUser.setSessiontoken(responseJson.optString(Constants.SESSION_TOKEN));
+//			
+			this.loggedInUser.setActive((responseJson.has(Constants.ACTIVE) == true && !responseJson.get(Constants.ACTIVE).equals(null)) 
+					? responseJson.getInt(Constants.ACTIVE) ==1 ? true : false : false);
+			this.loggedInUser.setAvgRating((responseJson.has(Constants.AVG_RATING) == true && !responseJson.get(Constants.AVG_RATING).equals(null)) ? responseJson.getLong(Constants.AVG_RATING) : 0);
+			this.loggedInUser.setEmailId((responseJson.has(Constants.EMAIL) == true && !responseJson.get(Constants.EMAIL).equals(null)) ? responseJson.getString(Constants.EMAIL) : null);
+			this.loggedInUser.setMobile((responseJson.has(Constants.MOBILE) == true && !responseJson.get(Constants.MOBILE).equals(null)) ? responseJson.getString(Constants.MOBILE) : null);
+			this.loggedInUser.setName((responseJson.has(Constants.NAME) == true && !responseJson.get(Constants.NAME).equals(null)) ? responseJson.getString(Constants.NAME) : null);
+			this.loggedInUser.setSessiontoken((responseJson.has(Constants.SESSION_TOKEN) == true && !responseJson.get(Constants.SESSION_TOKEN).equals(null)) 
+					? responseJson.getString(Constants.SESSION_TOKEN) : null);
+			this.loggedInUser.setUserId((responseJson.has(Constants.USEER_ID) == true && !responseJson.get(Constants.USEER_ID).equals(null)) ? responseJson.getInt(Constants.USEER_ID) : -100);
+
 		}
 		this.loggedInUser.setName(responseJson.optString(Constants.NAME));
 		try {
@@ -182,6 +194,14 @@ public final class LiefernRepository {
 		newCard = null;
 		deleteCard = null;
 		nearestUsers = new ArrayList<Geos>();
+	}
+
+	public boolean isSignupFlag() {
+		return signupFlag;
+	}
+
+	public void setSignupFlag(boolean signupFlag) {
+		this.signupFlag = signupFlag;
 	}
 
 	//	public void createRequestOrderResult(JSONObject json){
