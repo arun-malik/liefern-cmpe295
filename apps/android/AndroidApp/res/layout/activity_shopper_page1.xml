@@ -25,38 +25,32 @@
             <EditText
                 android:id="@+id/fromAddress1Text"
                 style="@style/InputEditText"
-                android:hint="Address 1"
-                android:text="test1" />
+                android:hint="Address 1" />
 
             <EditText
                 android:id="@+id/fromAddress2Text"
                 style="@style/InputEditText"
-                android:hint="Address 2"
-                android:text="test2" />
+                android:hint="Address 2" />
 
             <EditText
                 android:id="@+id/fromCityText"
                 style="@style/InputEditText"
-                android:hint="City"
-                android:text="San jose" />
+                android:hint="City" />
 
             <EditText
                 android:id="@+id/fromStateText"
                 style="@style/InputEditText"
-                android:hint="State"
-                android:text="ca" />
+                android:hint="State" />
 
             <EditText
                 android:id="@+id/fromCountryText"
                 style="@style/InputEditText"
-                android:hint="Country"
-                android:text="USA" />
+                android:hint="Country" />
 
             <EditText
                 android:id="@+id/fromZipText"
                 style="@style/InputEditText"
-                android:hint="ZIP"
-                android:text="95112" />
+                android:hint="ZIP" />
 
         </com.liefern.widgets.OpaqueLinearLayout>
 
@@ -71,38 +65,32 @@
             <EditText
                 android:id="@+id/toAddress1Text"
                 style="@style/InputEditText"
-                android:hint="Address 1"
-                android:text="test3" />
+                android:hint="Address 1" />
 
             <EditText
                 android:id="@+id/toAddress2Text"
                 style="@style/InputEditText"
-                android:hint="Address 2"
-                android:text="test4" />
+                android:hint="Address 2" />
 
             <EditText
                 android:id="@+id/toCityText"
                 style="@style/InputEditText"
-                android:hint="City"
-                android:text="LA" />
+                android:hint="City" />
 
             <EditText
                 android:id="@+id/toStateText"
                 style="@style/InputEditText"
-                android:hint="State"
-                android:text="CA" />
+                android:hint="State" />
 
             <EditText
                 android:id="@+id/toCountryText"
                 style="@style/InputEditText"
-                android:hint="Country"
-                android:text="USA" />
+                android:hint="Country" />
 
             <EditText
                 android:id="@+id/toZipText"
                 style="@style/InputEditText"
-                android:hint="ZIP"
-                android:text="98888" />
+                android:hint="ZIP" />
 
             <Button
                 android:id="@+id/nextShopperPage2"

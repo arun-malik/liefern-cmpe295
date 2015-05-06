@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.liefern.R;
+import com.liefern.models.LiefernRepository;
 
 public class SliderMenuListAdapter extends BaseAdapter {
 	// Slider items
@@ -46,9 +47,12 @@ public class SliderMenuListAdapter extends BaseAdapter {
 		if(convertView == null) {
 			if(position == 0) {
 				convertView = inflater.inflate(R.layout.user_info_slider_menu_list_item, parent,false);
+				TextView name = (TextView) convertView.findViewById(R.id.slider_menu_text);//user.getName()
+				name.setText(LiefernRepository.getInstance().getLoggedInUser().getName());
 			} else {
 				convertView = inflater.inflate(R.layout.slider_menu_list_item, null);
 				TextView oSliderMenuText = (TextView) convertView.findViewById(R.id.slider_menu_text);
+				
 				oSliderMenuText.setText(sliderMenuItems[position]);
 			}
 		}

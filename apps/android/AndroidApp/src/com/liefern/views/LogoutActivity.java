@@ -9,6 +9,7 @@ import android.support.v4.content.LocalBroadcastManager;
 
 import com.liefern.R;
 import com.liefern.models.LiefernRepository;
+import com.liefern.utility.SharedPreferenceStore;
 import com.liefern.webservices.impl.WebsevicesImpl;
 import com.liefern.webservices.models.WebServiceModel;
 
@@ -32,6 +33,8 @@ public class LogoutActivity extends LiefernBaseActivity {
 	public void notifyWebResponse(WebServiceModel model) {
 		dialog.cancel();
 		dialog = null;
+		SharedPreferenceStore.getInstance().clearStoredAccountDetails();
+		LiefernRepository.getInstance().releaseEveryThing();
 		LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(LOGOUT_ACTION));
 		LiefernRepository.getInstance().setAuthToken(null);
 	}

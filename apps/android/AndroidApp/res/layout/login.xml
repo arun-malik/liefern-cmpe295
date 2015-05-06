@@ -10,15 +10,13 @@
         android:id="@+id/email_id"
         style="@style/InputEditText"
         android:hint="@string/email_id"
-        android:inputType="textEmailAddress"
-        android:text="arunmalik@gmail.com" />
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/password"
         style="@style/InputEditText"
         android:hint="@string/password"
-        android:inputType="textPassword"
-        android:text="ABCD" />
+        android:inputType="textPassword" />
     
     <CheckBox
         android:id="@+id/remember_me"

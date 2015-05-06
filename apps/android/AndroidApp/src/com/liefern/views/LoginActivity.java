@@ -3,9 +3,11 @@ package com.liefern.views;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.liefern.R;
 import com.liefern.models.User;
@@ -30,6 +32,7 @@ public class LoginActivity extends LiefernBaseActivity {
 		passwordEditText = (EditText) findViewById(R.id.password);
 		rememberMeCheckBox = (CheckBox) findViewById(R.id.remember_me);
 		user = SharedPreferenceStore.getInstance().getStoredAccountDetails();
+		
 		if(user.getEmailId().length() > 0) {
 			emailIdEditText.setText(user.getEmailId());
 			passwordEditText.setText(user.getPassword());

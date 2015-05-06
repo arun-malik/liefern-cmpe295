@@ -173,6 +173,16 @@ public final class LiefernRepository {
 		this.deleteCard = deleteCard;
 	}
 
+	public void releaseEveryThing(){
+		loggedInUser = null;
+		authToken = null;
+		requestOrderList = new ArrayList<Order>();
+		builtOrder = new Order(); 
+		paymentCardList = new ArrayList<Payments>();
+		newCard = null;
+		deleteCard = null;
+		nearestUsers = new ArrayList<Geos>();
+	}
 
 	//	public void createRequestOrderResult(JSONObject json){
 	//		try {

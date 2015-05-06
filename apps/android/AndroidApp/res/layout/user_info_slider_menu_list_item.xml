@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
-        android:text="ARUN MALIK"
+        android:text="PROFILE"
         android:layout_weight="1"
         android:textSize="@dimen/form_heading_font_size" />
 
